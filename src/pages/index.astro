@@ -43,7 +43,9 @@ import Galleri from "../components/gallery.astro"
   </g>
 </svg>
 		</div>
-		<Image src={hero} alt="AutoMind The Workshop" width={1920} height={500}/>
+		<div class="hero">
+			<Image src={hero} alt="AutoMind The Workshop" width={1920} height={500} loading="eager"/>
+		</div>
 		<div class="container">
 			<h1>Velkommen hos AutoMind</h1>
 			<p>AutoMind er din nøgle til at forstå fremtidens køretøjer. Vi specialiserer os i at levere førsteklasses uddannelsesmuligheder inden for autobranchen, både onsite og online. Vores kurser er skræddersyet til at ruste jer med den viden og ekspertise, der er nødvendig for at navigere i den hastigt udviklende autobranche.</p>
@@ -138,6 +140,10 @@ a {
 	justify-content: center;
 	margin-top: 1.5rem;
 	margin-bottom: 3rem;
+}
+
+.hero {
+	height: 500px;
 }
 
 .gallery {
