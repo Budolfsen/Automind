@@ -5,12 +5,14 @@ import { Image } from 'astro:assets';
 interface Props {
    imagePath: string;
    altText: string;
+   width?: number;
+   height?: number;
 }
 
-const { imagePath, altText } = Astro.props;
+const { imagePath, altText, width, height } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/images/*.{jpeg,jpg,png,webp}');
 if (!images[imagePath]) throw new Error(`"${imagePath}" does not exist in glob: "/src/images/*.{jpeg,jpg,png,webp}"`);
 ---
 
 
-    <Image src={images[imagePath]()} alt={altText} class="galleryImg" />
+    <Image src={images[imagePath]()} alt={altText} width={width} height={height} class="galleryImg" />
