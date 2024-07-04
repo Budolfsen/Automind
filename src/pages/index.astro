@@ -44,7 +44,7 @@ import Galleri from "../components/gallery.astro"
 </svg>
 		</div>
 		<div class="hero">
-			<Image src={hero} alt="AutoMind The Workshop" width={1920} height={500} loading="eager"/>
+			<Image src={hero} alt="AutoMind The Workshop" width={1920} height={500} loading="eager" class="heroImage"/>
 		</div>
 		<div class="container">
 			<h1>Velkommen hos AutoMind</h1>
@@ -142,8 +142,8 @@ a {
 	margin-bottom: 3rem;
 }
 
-.hero {
-	height: 500px;
+.heroImage {
+	aspect-ratio: 16 / 9;
 }
 
 .gallery {
