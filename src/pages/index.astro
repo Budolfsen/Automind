@@ -1,9 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import autoMind from "../images/AutoMind The Workshop.webp"
-import battery from "../images/Battery.webp"
-import dining from "../images/Dining.webp"
-import stydy from "../images/Study.webp"
+import hero from "../images/automind1.webp";
+import Galleri from "../components/gallery.astro"
+
 ---
 
 <html lang="en">
@@ -44,18 +43,11 @@ import stydy from "../images/Study.webp"
   </g>
 </svg>
 		</div>
-		<Image src={autoMind} alt="AutoMind The Workshop" width="1920" height="500"/>
+		<Image src={hero} alt="AutoMind The Workshop" width="1920" height="500"/>
 		<div class="container">
 			<h1>Velkommen hos AutoMind</h1>
-			<p>AutoMind er din nøgle til at forstå fremtidens køretøjer. Vi specialiserer os i at levere førsteklasses 
-	uddannelsesmuligheder inden for elbiler, både onsite og online. Vores kurser er skræddersyet til at ruste dig med den 
-	viden og ekspertise, der er nødvendig for at navigere i den hastigt udviklende verden af elektriske køretøjer. 
-			</p>
-	<p>4
-	Uanset om du 
-	foretrækker at deltage i vores praktiske onsite kurser eller tage din uddannelse med dig via vores online platform, er 
-	AutoMind din partner på vejen mod at forstå, vedligeholde og drage fordel af elbilerne i dag og i fremtiden. Så hop med på 
-	elbilbølgen med AutoMind og vær med til at forme den grønne transportrevolution.</p>
+			<p>AutoMind er din nøgle til at forstå fremtidens køretøjer. Vi specialiserer os i at levere førsteklasses uddannelsesmuligheder inden for autobranchen, både onsite og online. Vores kurser er skræddersyet til at ruste jer med den viden og ekspertise, der er nødvendig for at navigere i den hastigt udviklende autobranche.</p>
+<p>Uanset om du foretrækker at deltage i vores praktiske onsite kurser eller tage din uddannelse med dig via vores online platform, er AutoMind din partner på vejen mod at forstå, vedligeholde og fejlsøge på alle typer køretøjer, både i dag og i fremtiden. Så hop ind i fremtiden sammen med AutoMind og vær med til at forme den nye autobranche.</p>
 
 	<h3>Kontakt AutoMind</h3>
 	<h4>AutoMind ApS</h4>
@@ -65,10 +57,16 @@ import stydy from "../images/Study.webp"
 	CVR: 40611797</p>
 </div>
 <div class="gallery">
-	<Image src={battery} alt="Battery" width="1000" height="1000"  densities={[1.5, 2]} class="galleryImg"/>
-	<Image src={dining} alt="Dining" width="1000" height="1000"  densities={[1.5, 2]} class="galleryImg"/>
-	<Image src={stydy} alt="Study" width="1000" height="1000"  densities={[1.5, 2]} class="galleryImg"/>
+	<Galleri imagePath="/src/images/automind2.webp" altText="Tre biler på række hos Automind"  width="400" height="200"/>
+	<Galleri imagePath="/src/images/automind3.webp" altText="Kursuslokalet set fra tavlen"  width="400" height="200"/>
+	<Galleri imagePath="/src/images/automind4.webp" altText="Værktøjsbord med diverse ting til elbiler"  width="400" height="200"/>
+	<Galleri imagePath="/src/images/automind5.webp" altText="Elbils dele"  width="400" height="200"/>
+	<Galleri imagePath="/src/images/automind6.webp" altText="Kursuslokalet fra værkstedet"  width="400" height="200"/>
+	<Galleri imagePath="/src/images/automind7.webp" altText="Værkstedet"  width="400" height="200"/>
+	<Galleri imagePath="/src/images/automind8.webp" altText="Byd Atto 3 og Byd Seal bagfra" />
+	<Galleri imagePath="/src/images/automind1.webp" altText="Byd Atto 3 og Byd Seal " width="400" height="200" />
 </div>
+
 	</body>
 </html>
 
@@ -147,10 +145,12 @@ a {
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: 1rem;
 	margin-top: 2rem;
-
 	.galleryImg {
-		aspect-ratio: 1/1;
+		aspect-ratio: 16 / 9;
+		width: 100%;
+		height: auto;
 	}
+
 }
 
 </style>
