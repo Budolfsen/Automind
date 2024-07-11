@@ -1,7 +1,7 @@
 ---
-import { Image } from "astro:assets";
-import hero from "../images/automind1.webp";
-import Galleri from "../components/gallery.astro"
+import { Image } from '@unpic/astro';
+// import hero from "https://res.cloudinary.com/podi/image/upload/v1720699384/AutoMind/";
+// import Galleri from "../components/gallery.astro"
 
 ---
 
@@ -44,7 +44,8 @@ import Galleri from "../components/gallery.astro"
 </svg>
 		</div>
 		<div class="hero">
-			<Image src={hero} alt="AutoMind The Workshop" width="1920" height="600" class="heroImage"/>
+			<Image src='https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind1' alt="AutoMind The Workshop"   width={1920}
+  height={600} class="heroImage"/>
 		</div>
 		<div class="container">
 			<h1>Velkommen hos AutoMind</h1>
@@ -59,14 +60,22 @@ import Galleri from "../components/gallery.astro"
 	CVR: 40611797</p>
 </div>
 <div class="gallery">
-	<Galleri imagePath="/src/images/automind2.webp" altText="Tre biler på række hos Automind" width={400} height={200}/>
-	<Galleri imagePath="/src/images/automind3.webp" altText="Kursuslokalet set fra tavlen" width={400} height={200}/>
-	<Galleri imagePath="/src/images/automind4.webp" altText="Værktøjsbord med diverse ting til elbiler" width={400} height={200}/>
-	<Galleri imagePath="/src/images/automind5.webp" altText="Elbils dele" width={400} height={200}/>
-	<Galleri imagePath="/src/images/automind6.webp" altText="Kursuslokalet fra værkstedet" width={400} height={200}/>
-	<Galleri imagePath="/src/images/automind7.webp" altText="Værkstedet" width={400} height={200}/>
-	<Galleri imagePath="/src/images/automind8.webp" altText="Byd Atto 3 og Byd Seal bagfra" width={400} height={200}/>
-	<Galleri imagePath="/src/images/automind1.webp" altText="Byd Atto 3 og Byd Seal" width={400} height={200} />
+	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind2" alt="Tre biler på række hos Automind"   width={800}
+  height={600}/>
+	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind3" alt="Kursuslokalet set fra tavlen"   width={800}
+  height={600}/>
+	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind4" alt="Værktøjsbord med diverse ting til elbiler"   width={800}
+  height={600}/>
+	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind5" alt="Elbils dele"   width={800}
+  height={600}/>
+	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind6" alt="Kursuslokalet fra værkstedet"   width={800}
+  height={600}/>
+	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind7" alt="Værkstedet"   width={800}
+  height={600}/>
+	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind8" alt="Byd Atto 3 og Byd Seal bagfra"   width={800}
+  height={600}/>
+	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind1" alt="Byd Atto 3 og Byd Seal"   width={800}
+  height={600} />
 </div>
 
 	</body>
