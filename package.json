@@ -13,6 +13,6 @@
     "@astrojs/check": "^0.7.0",
     "@unpic/astro": "^0.0.46",
     "astro": "^4.11.3",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   }
 }
