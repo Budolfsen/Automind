@@ -1,8 +1,5 @@
 ---
-import { Image } from '@unpic/astro';
-// import hero from "https://res.cloudinary.com/podi/image/upload/v1720699384/AutoMind/";
-// import Galleri from "../components/gallery.astro"
-
+import { CldImage } from 'astro-cloudinary';
 ---
 
 <html lang="en">
@@ -45,13 +42,15 @@ import { Image } from '@unpic/astro';
 </svg>
 		</div>
 		<div class="hero">
-			<Image src='https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind1' alt="AutoMind The Workshop"   width={1920}
+			<CldImage src='https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind1' alt="AutoMind The Workshop"   width={1920}
   height={600} class="heroImage"/>
 		</div>
 		<div class="container">
 			<h1>Velkommen hos AutoMind</h1>
 			<p>AutoMind er din nøgle til at forstå fremtidens køretøjer. Vi specialiserer os i at levere førsteklasses uddannelsesmuligheder inden for autobranchen, både onsite og online. Vores kurser er skræddersyet til at ruste jer med den viden og ekspertise, der er nødvendig for at navigere i den hastigt udviklende autobranche.</p>
 <p>Uanset om du foretrækker at deltage i vores praktiske onsite kurser eller tage din uddannelse med dig via vores online platform, er AutoMind din partner på vejen mod at forstå, vedligeholde og fejlsøge på alle typer køretøjer, både i dag og i fremtiden. Så hop ind i fremtiden sammen med AutoMind og vær med til at forme den nye autobranche.</p>
+
+	<a class="picoButton" href="/pico">Pico</a>
 
 	<h3>Kontakt AutoMind</h3>
 	<h4>AutoMind ApS</h4>
@@ -61,21 +60,21 @@ import { Image } from '@unpic/astro';
 	CVR: 40611797</p>
 </div>
 <div class="gallery">
-	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind2" alt="Tre biler på række hos Automind"   width={400}
+	<CldImage src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind2" alt="Tre biler på række hos Automind"   width={400}
   height={200} class="galleryImg"/>
-	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind3" alt="Kursuslokalet set fra tavlen"   width={400}
+	<CldImage src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind3" alt="Kursuslokalet set fra tavlen"   width={400}
   height={200} class="galleryImg"/>
-	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind4" alt="Værktøjsbord med diverse ting til elbiler"   width={400}
+	<CldImage src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind4" alt="Værktøjsbord med diverse ting til elbiler"   width={400}
   height={200} class="galleryImg"/>
-	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind5" alt="Elbils dele"   width={400}
+	<CldImage src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind5" alt="Elbils dele"   width={400}
   height={200} class="galleryImg"/>
-	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind6" alt="Kursuslokalet fra værkstedet"   width={400}
+	<CldImage src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind6" alt="Kursuslokalet fra værkstedet"   width={400}
   height={200} class="galleryImg"/>
-	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind7" alt="Værkstedet"   width={400}
+	<CldImage src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind7" alt="Værkstedet"   width={400}
   height={200} class="galleryImg"/>
-	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind8" alt="Byd Atto 3 og Byd Seal bagfra"   width={400}
+	<CldImage src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind8" alt="Byd Atto 3 og Byd Seal bagfra"   width={400}
   height={200} class="galleryImg"/>
-	<Image src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind1" alt="Byd Atto 3 og Byd Seal"   width={400}
+	<CldImage src="https://res.cloudinary.com/podi/image/upload/v1720699377/AutoMind/automind1" alt="Byd Atto 3 og Byd Seal"   width={400}
   height={200} class="galleryImg" />
 </div>
 
@@ -142,6 +141,16 @@ img {
 a {
 	color: var(--orange);
 	font-weight: bold;
+}
+
+.picoButton {
+	display: inline-block;
+	margin-top: 1.5rem;
+	padding: 0.75rem 1.5rem;
+	background: var(--orange);
+	color: oklch(0% 0 0);
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .logo {
