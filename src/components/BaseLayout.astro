@@ -3,9 +3,9 @@ import Font from 'astro/components/Font.astro'
 import '../styles/global.css'
 import SiteFooter from './SiteFooter.astro'
 import SiteHeader from './SiteHeader.astro'
-import { getSettings } from '../lib/content'
+import { getSeoTexts, getSettings } from '../lib/content'
 import { heroImageSizes, heroImageWidths, imageSrc, responsiveImage } from '../lib/images'
-import { organizationNode } from '../lib/seo'
+import { organizationNode, seoTextList } from '../lib/seo'
 import type { Figure } from '../lib/types'
 
 interface Props {
@@ -18,11 +18,10 @@ interface Props {
 
 const { title, description, image = null, lcpImage = null, jsonLd } = Astro.props
 const settings = await getSettings()
+const seoTexts = await getSeoTexts()
 const canonical = new URL(Astro.url.pathname, Astro.site)
-const ogImage = image?.asset ? imageSrc(image.asset._id, 1200) : undefined
-const lcp = lcpImage?.asset
-  ? responsiveImage(lcpImage.asset._id, lcpImage.asset.width, heroImageWidths)
-  : null
+const ogImage = image?.asset ? imageSrc(image, 1200) : undefined
+const lcp = lcpImage?.asset ? responsiveImage(lcpImage, heroImageWidths) : null
 const extra = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []
 const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
 const json = JSON.stringify({
@@ -41,6 +40,7 @@ const json = JSON.stringify({
         url: siteUrl,
       },
     },
+    ...(seoTexts.length > 0 ? [seoTextList(seoTexts)] : []),
     ...extra,
   ],
 }).replace(/</g, '\\u003c')

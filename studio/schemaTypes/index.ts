@@ -1,5 +1,5 @@
 import { contactPerson, figure, linkAction, pageSection, promptCard, topic } from './objects'
-import { course, page, siteSettings, upcomingCourse } from './documents'
+import { course, page, seoText, siteSettings, upcomingCourse } from './documents'
 
 export const schemaTypes = [
   figure,
@@ -12,4 +12,5 @@ export const schemaTypes = [
   page,
   course,
   upcomingCourse,
+  seoText,
 ]

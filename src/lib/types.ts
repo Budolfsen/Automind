@@ -5,10 +5,26 @@ export type SanityAsset = {
   height: number
 }
 
+export type ImageCrop = {
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type ImageHotspot = {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
 export type Figure = {
   alt: string
   caption?: string | null
   asset: SanityAsset | null
+  crop?: ImageCrop | null
+  hotspot?: ImageHotspot | null
 }
 
 export type Action = {
@@ -79,6 +95,12 @@ export type SiteSettings = {
   contactLabel: string
   navigation: NavItem[]
   socialLinks: SocialLink[]
+}
+
+export type SeoText = {
+  title: string
+  text: string
+  order: number
 }
 
 export type Course = {

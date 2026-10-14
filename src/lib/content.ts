@@ -1,6 +1,6 @@
 import { sanityClient } from './sanity'
-import { COURSES_QUERY, PAGE_QUERY, SETTINGS_QUERY, UPCOMING_QUERY } from './queries'
-import type { Course, PageDocument, SiteSettings, UpcomingCourse } from './types'
+import { COURSES_QUERY, PAGE_QUERY, SEO_TEXTS_QUERY, SETTINGS_QUERY, UPCOMING_QUERY } from './queries'
+import type { Course, PageDocument, SeoText, SiteSettings, UpcomingCourse } from './types'
 
 export async function getSettings(): Promise<SiteSettings> {
   const settings = await sanityClient.fetch<SiteSettings | null>(SETTINGS_QUERY)
@@ -16,6 +16,10 @@ export async function getPage(slug: string): Promise<PageDocument> {
     throw new Error(`Siden "${slug}" mangler i Sanity. Kør npm run seed.`)
   }
   return page
+}
+
+export async function getSeoTexts(): Promise<SeoText[]> {
+  return sanityClient.fetch<SeoText[]>(SEO_TEXTS_QUERY)
 }
 
 export async function getCourses(): Promise<Course[]> {

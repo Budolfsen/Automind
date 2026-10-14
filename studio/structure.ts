@@ -12,4 +12,5 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('page').title('Sider'),
       S.documentTypeListItem('course').title('Kurser'),
       S.documentTypeListItem('upcomingCourse').title('Kommende kurser'),
+      S.documentTypeListItem('seoText').title('SEO-tekster'),
     ])

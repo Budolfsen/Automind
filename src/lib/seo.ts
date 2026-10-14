@@ -1,4 +1,4 @@
-import type { SiteSettings, UpcomingCourse } from './types'
+import type { SeoText, SiteSettings, UpcomingCourse } from './types'
 
 export function organizationNode(settings: SiteSettings, siteUrl: string) {
   return {
@@ -27,6 +27,23 @@ export function courseNodes(courses: UpcomingCourse[], providerName: string, pro
       url: providerUrl,
     },
   }))
+}
+
+export function seoTextList(texts: SeoText[]) {
+  return {
+    '@type': 'ItemList',
+    name: 'Om AutoMind',
+    itemListElement: texts.map((text, index) => ({
+      '@type': 'ListItem',
+      position: text.order || index + 1,
+      item: {
+        '@type': 'Thing',
+        name: text.title,
+        description: text.text,
+        inLanguage: 'da',
+      },
+    })),
+  }
 }
 
 function cleanUrl(href: string) {

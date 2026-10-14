@@ -338,9 +338,90 @@ async function uploadPoster() {
   return asset._id
 }
 
+const seoTexts = [
+  {
+    _id: 'seo-elbilkurser',
+    _type: 'seoText',
+    title: 'Elbilkurser for mekanikere og værksteder',
+    text: 'AutoMind i Hjørring holder elbilkurser for mekanikere og værksteder. Undervisningen tager udgangspunkt i hverdagen på værkstedet, så viden om elbilens systemer kan bruges på den næste opgave.',
+    order: 1,
+  },
+  {
+    _id: 'seo-hoejvolt',
+    _type: 'seoText',
+    title: 'Højvoltssikkerhed i praksis',
+    text: 'Kurserne dækker højvoltssikkerhed i praksis. Mekanikeren lærer, hvad der kræves for at arbejde sikkert med elbilens højvoltssystemer, tæt på de situationer værkstedet møder.',
+    order: 2,
+  },
+  {
+    _id: 'seo-bms',
+    _type: 'seoText',
+    title: 'BMS og ladesystemer',
+    text: 'AutoMind underviser i batteristyring og ladesystemer. Forløbet giver en bedre forståelse af BMS, ladning og den systematiske fejlfinding, der hører til på elbiler.',
+    order: 3,
+  },
+  {
+    _id: 'seo-diagnostik',
+    _type: 'seoText',
+    title: 'Diagnostik og systematisk fejlfinding',
+    text: 'Diagnostik hos AutoMind handler om mere end en fejlkode. Værkstedet arbejder med symptomer, observationer og den fejlfinding, der allerede er udført, så næste skridt bliver tydeligt.',
+    order: 4,
+  },
+  {
+    _id: 'seo-picoscope',
+    _type: 'seoText',
+    title: 'Avanceret PicoScope-kursus',
+    text: 'Blandt de kommende kurser er et avanceret PicoScope-kursus med Klaus Schmidt og Mads Budolfsen. Invitation og tilmelding ligger på siden med kommende kurser.',
+    order: 5,
+  },
+  {
+    _id: 'seo-support',
+    _type: 'seoText',
+    title: 'Teknisk support til værksteder',
+    text: 'Når elbilen kræver mere end en fejlkode, giver AutoMind teknisk support. Det er faglig sparring til værksteder om elbilens systemer, diagnostik og fejlfinding.',
+    order: 6,
+  },
+  {
+    _id: 'seo-hjoerring',
+    _type: 'seoText',
+    title: 'AutoMind i Hjørring',
+    text: 'AutoMind har base i Hjørring. Herfra tilbydes elbilkurser til mekanikere og teknisk support til værksteder, der arbejder med elbiler.',
+    order: 7,
+  },
+  {
+    _id: 'seo-maalgruppe',
+    _type: 'seoText',
+    title: 'Hvem kurserne er til',
+    text: 'Kurserne er til værksteder og mekanikere, der vil styrke deres viden om elbiler. AutoMind tager udgangspunkt i værkstedets behov, niveau og ønsker til forløbet.',
+    order: 8,
+  },
+  {
+    _id: 'seo-kontakt',
+    _type: 'seoText',
+    title: 'Kontakt og tilmelding',
+    text: 'Kontakt AutoMind om kurser, datoer, indhold og teknisk support. Skriv til Mads Budolfsen på mads@automind.dk. En henvendelse starter med en faglig dialog om værkstedets opgave.',
+    order: 9,
+  },
+  {
+    _id: 'seo-backup',
+    _type: 'seoText',
+    title: 'Faglig backup til værkstedet',
+    text: 'AutoMind er faglig backup, når opgaven driller. Kurser og teknisk support ligger tæt på praksis, så mekanikeren ikke står alene med fejlen på elbilen.',
+    order: 10,
+  },
+]
+
+if (process.argv.includes('--seo-only')) {
+  for (const doc of seoTexts) {
+    await client.createOrReplace(doc)
+    console.log('SEO:', doc._id)
+  }
+  process.exit(0)
+}
+
 const assets = await uploadImages()
 const posterId = await uploadPoster()
-const docs = documents(assets, posterId)
+const docs = [...documents(assets, posterId), ...seoTexts]
 for (const doc of docs) {
   await client.createOrReplace(doc)
   console.log('Dokument:', doc._id)

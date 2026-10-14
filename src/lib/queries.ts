@@ -1,6 +1,8 @@
 const figure = `{
   alt,
   caption,
+  "crop": image.crop,
+  "hotspot": image.hotspot,
   "asset": image.asset->{
     _id,
     url,
@@ -45,6 +47,12 @@ export const PAGE_QUERY = `*[_type == "page" && slug.current == $slug][0]{
   notice,
   contactName,
   promptCard{ eyebrow, title, text, ctaLabel, ctaHref }
+}`
+
+export const SEO_TEXTS_QUERY = `*[_type == "seoText"] | order(order asc){
+  title,
+  text,
+  order
 }`
 
 export const COURSES_QUERY = `*[_type == "course"] | order(order asc){

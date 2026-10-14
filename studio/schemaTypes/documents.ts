@@ -74,6 +74,21 @@ export const course = defineType({
   orderings: [{ title: 'Rækkefølge', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],
 })
 
+export const seoText = defineType({
+  name: 'seoText',
+  title: 'SEO-tekst',
+  type: 'document',
+  fields: [
+    defineField({ name: 'title', title: 'Titel', type: 'string', validation: (rule) => rule.required() }),
+    defineField({ name: 'text', title: 'Tekst', type: 'text', rows: 6, validation: (rule) => rule.required() }),
+    defineField({ name: 'order', title: 'Rækkefølge', type: 'number', validation: (rule) => rule.required() }),
+  ],
+  orderings: [{ title: 'Rækkefølge', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],
+  preview: {
+    select: { title: 'title', subtitle: 'text' },
+  },
+})
+
 export const upcomingCourse = defineType({
   name: 'upcomingCourse',
   title: 'Kommende kursus',

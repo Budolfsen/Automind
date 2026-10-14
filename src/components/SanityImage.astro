@@ -1,5 +1,5 @@
 ---
-import { responsiveImage } from '../lib/images'
+import { objectPosition, responsiveImage } from '../lib/images'
 import type { Figure } from '../lib/types'
 
 interface Props {
@@ -23,7 +23,8 @@ const {
 } = Astro.props
 
 const asset = image.asset
-const picture = asset ? responsiveImage(asset._id, asset.width, widths, ratio) : null
+const picture = asset ? responsiveImage(image, widths, ratio) : null
+const position = objectPosition(image.crop, image.hotspot)
 ---
 
 {asset && picture && <img
@@ -32,8 +33,9 @@ const picture = asset ? responsiveImage(asset._id, asset.width, widths, ratio) :
   srcset={picture.srcset}
   sizes={sizes}
   alt={image.alt}
-  width={asset.width}
-  height={asset.height}
+  width={picture.width}
+  height={picture.height}
+  style={position ? `object-position: ${position}` : undefined}
   loading={loading}
   decoding={fetchpriority === 'high' ? 'sync' : 'async'}
   fetchpriority={fetchpriority}
