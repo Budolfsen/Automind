@@ -29,17 +29,21 @@ export function courseNodes(courses: UpcomingCourse[], providerName: string, pro
   }))
 }
 
+export function proseParagraphs(text: string) {
+  return text.split(/\n\s*\n/).map((part) => part.trim()).filter(Boolean)
+}
+
 export function seoTextList(texts: SeoText[]) {
   return {
     '@type': 'ItemList',
-    name: 'Om AutoMind',
+    name: 'Elbilkurser og teknisk support',
     itemListElement: texts.map((text, index) => ({
       '@type': 'ListItem',
       position: text.order || index + 1,
       item: {
         '@type': 'Thing',
         name: text.title,
-        description: text.text,
+        description: [text.intro, ...text.sections.map((section) => `${section.heading}. ${section.text}`)].join(' '),
         inLanguage: 'da',
       },
     })),

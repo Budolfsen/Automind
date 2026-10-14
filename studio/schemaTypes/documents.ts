@@ -80,12 +80,27 @@ export const seoText = defineType({
   type: 'document',
   fields: [
     defineField({ name: 'title', title: 'Titel', type: 'string', validation: (rule) => rule.required() }),
-    defineField({ name: 'text', title: 'Tekst', type: 'text', rows: 6, validation: (rule) => rule.required() }),
+    defineField({ name: 'intro', title: 'Indledning', type: 'text', rows: 8, validation: (rule) => rule.required() }),
+    defineField({
+      name: 'sections',
+      title: 'Underemner',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          defineField({ name: 'heading', title: 'Overskrift', type: 'string', validation: (rule) => rule.required() }),
+          defineField({ name: 'text', title: 'Tekst', type: 'text', rows: 6, validation: (rule) => rule.required() }),
+        ],
+      }],
+      validation: (rule) => rule.required().length(2),
+    }),
+    defineField({ name: 'linkLabel', title: 'Linktekst', type: 'string', validation: (rule) => rule.required() }),
+    defineField({ name: 'linkHref', title: 'Link', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'order', title: 'Rækkefølge', type: 'number', validation: (rule) => rule.required() }),
   ],
   orderings: [{ title: 'Rækkefølge', name: 'orderAsc', by: [{ field: 'order', direction: 'asc' }] }],
   preview: {
-    select: { title: 'title', subtitle: 'text' },
+    select: { title: 'title', subtitle: 'intro' },
   },
 })
 

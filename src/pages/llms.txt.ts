@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro'
 import { getSeoTexts } from '../lib/content'
+import { proseParagraphs } from '../lib/seo'
 
 const pages = [
   ['Forside', 'https://automind.dk/'],
@@ -29,7 +30,13 @@ export const GET: APIRoute = async () => {
       '',
       `https://automind.dk/emner/#${text._id}`,
       '',
-      text.text,
+      ...proseParagraphs(text.intro).flatMap((paragraph) => [paragraph, '']),
+      ...text.sections.flatMap((section) => [
+        `#### ${section.heading}`,
+        '',
+        ...proseParagraphs(section.text).flatMap((paragraph) => [paragraph, '']),
+      ]),
+      `${text.linkLabel}: https://automind.dk${text.linkHref}`,
       '',
     ]),
     'Invitationer til enkelte kurser er ikke beregnet til indeksering.',

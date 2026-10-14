@@ -535,11 +535,20 @@ details[open] .when-open {
   gap: var(--space-section);
 }
 
-.topic-list h2 {
-  font-size: var(--step-section);
+.topic-list h2,
+.topic-list h3 {
   font-weight: 700;
   line-height: 1.2;
   max-width: 36rem;
+}
+
+.topic-list h2 {
+  font-size: var(--step-section);
+}
+
+.topic-list h3 {
+  font-size: var(--step-1);
+  margin-top: var(--space-l);
 }
 
 .wide-photo {

@@ -338,75 +338,139 @@ async function uploadPoster() {
   return asset._id
 }
 
+function seoSection(key, heading, text) {
+  return { _key: key, _type: 'object', heading, text }
+}
+
 const seoTexts = [
   {
     _id: 'seo-elbilkurser',
     _type: 'seoText',
     title: 'Elbilkurser for mekanikere og værksteder',
-    text: 'AutoMind i Hjørring holder elbilkurser for mekanikere og værksteder. Undervisningen tager udgangspunkt i hverdagen på værkstedet, så viden om elbilens systemer kan bruges på den næste opgave.',
+    intro: 'Et elbilkursus hos AutoMind i Hjørring er for mekanikere og værksteder, der arbejder med elbiler. Undervisningen tager udgangspunkt i hverdagen på værkstedet, så det, I lærer om elbilens systemer, kan bruges på den næste opgave.\n\nElbilen stiller nye krav til mekanikeren. Derfor aftaler I forløb og indhold med AutoMind ud fra det, jeres værksted har brug for. Aktuelle datoer og priser hører med i den samtale.',
+    sections: [
+      seoSection('undervisning', 'Undervisning tæt på værkstedet', 'Kurserne foregår tæt på bilerne og det udstyr, mekanikeren bruger. Det gør det lettere at tage viden om elbilens systemer med tilbage til værkstedet, i stedet for at den bliver stående i et lokale uden sammenhæng med opgaven.'),
+      seoSection('forloeb', 'Forløb efter værkstedets behov', 'AutoMind lægger kurset efter jeres niveau og ønsker. I kan starte med at fortælle, hvad I vil blive bedre til, så forløbet passer til de mekanikere, der skal på kursus.'),
+    ],
+    linkLabel: 'Se elbilkurserne',
+    linkHref: '/kurser',
     order: 1,
   },
   {
     _id: 'seo-hoejvolt',
     _type: 'seoText',
     title: 'Højvoltssikkerhed i praksis',
-    text: 'Kurserne dækker højvoltssikkerhed i praksis. Mekanikeren lærer, hvad der kræves for at arbejde sikkert med elbilens højvoltssystemer, tæt på de situationer værkstedet møder.',
+    intro: 'Højvoltssikkerhed i praksis er et elbilkursus hos AutoMind i Hjørring. Mekanikeren lærer, hvad der kræves for at arbejde sikkert med elbilens højvoltssystemer, i de situationer værkstedet møder.\n\nKurset handler om sikkerhed i arbejdet. Det er ikke en gennemgang, der slipper opgaven på værkstedet.',
+    sections: [
+      seoSection('daglig', 'Sikkerhed i det daglige arbejde', 'Viden om højvolt skal kunne bruges, når bilen står på værkstedet. Derfor ligger undervisningen tæt på hverdagen og på det, mekanikeren skal tage stilling til, før der arbejdes på systemet.'),
+      seoSection('forloeb', 'Et forløb til jeres mekanikere', 'Tal med AutoMind om et kursusforløb med fokus på højvoltssikkerhed og dit værksteds behov. Indhold, datoer og priser aftales i den dialog.'),
+    ],
+    linkLabel: 'Læs om kurset i højvoltssikkerhed',
+    linkHref: '/kurser',
     order: 2,
   },
   {
     _id: 'seo-bms',
     _type: 'seoText',
     title: 'BMS og ladesystemer',
-    text: 'AutoMind underviser i batteristyring og ladesystemer. Forløbet giver en bedre forståelse af BMS, ladning og den systematiske fejlfinding, der hører til på elbiler.',
+    intro: 'AutoMind underviser mekanikere i BMS og ladesystemer. Forløbet i Hjørring giver en bedre forståelse af batteristyring, ladning og den systematiske fejlfinding, der hører til på elbiler.\n\nKurset er til værksteder, der vil kunne følge batteriet og ladningen, når bilen ikke opfører sig, som den skal.',
+    sections: [
+      seoSection('batteri', 'Batteristyring og ladning', 'BMS er bilens styring af batteriet. Sammen med ladesystemet er det en del af den viden, mekanikeren bruger, når en elbil skal fejlsøges, og ladningen eller batteriet er en del af opgaven.'),
+      seoSection('fejlfinding', 'Systematisk fejlfinding', 'Undervisningen kobler batteristyring og ladning til en systematisk fejlfinding. I kan tale med AutoMind om et forløb til de mekanikere, der skal arbejde med elbilerne.'),
+    ],
+    linkLabel: 'Se kurset om BMS og ladesystemer',
+    linkHref: '/kurser',
     order: 3,
   },
   {
     _id: 'seo-diagnostik',
     _type: 'seoText',
     title: 'Diagnostik og systematisk fejlfinding',
-    text: 'Diagnostik hos AutoMind handler om mere end en fejlkode. Værkstedet arbejder med symptomer, observationer og den fejlfinding, der allerede er udført, så næste skridt bliver tydeligt.',
+    intro: 'Diagnostik hos AutoMind handler om mere end en fejlkode. I Hjørring arbejder værkstedet med symptomer, observationer og den fejlfinding, der allerede er udført, så næste skridt bliver tydeligt.\n\nDen tilgang bruges både på kurserne og, når opgaven driller, i den tekniske sparring.',
+    sections: [
+      seoSection('symptomer', 'Fra symptomer til næste skridt', 'En fejlkode er et spor, ikke hele svaret. AutoMind tager udgangspunkt i bilens symptomer, dine observationer og det, værkstedet allerede har prøvet, før næste skridt lægges.'),
+      seoSection('udstyr', 'Udstyr og systemforståelse', 'Diagnostik kræver både udstyr og forståelse af elbilens systemer. Kurserne giver den forståelse, så fejlfinding på værkstedet kan gøres systematisk.'),
+    ],
+    linkLabel: 'Læs om diagnostik på elbiler',
+    linkHref: '/kurser',
     order: 4,
   },
   {
     _id: 'seo-picoscope',
     _type: 'seoText',
     title: 'Avanceret PicoScope-kursus',
-    text: 'Blandt de kommende kurser er et avanceret PicoScope-kursus med Klaus Schmidt og Mads Budolfsen. Invitation og tilmelding ligger på siden med kommende kurser.',
+    intro: 'Det avancerede PicoScope-kursus hos AutoMind er to dage med Klaus Schmidt og Mads Budolfsen. Invitation og tilmelding ligger på siden med kommende kurser.\n\nKurset er lagt an på et højt tempo, med tricks der skal gøre hverdagen på værkstedet lettere.',
+    sections: [
+      seoSection('maalning', 'To dage med måling i praksis', 'Kurset er praktisk og ligger tæt på den fejlfinding, mekanikeren laver med måleudstyr. Der er plads til fordybelse, og undervisningen holdes i et fagligt tempo.'),
+      seoSection('tilmelding', 'Dato, pris og pladser', 'Dato, pris og ledige pladser får I ved at skrive til Mads Budolfsen på mads@automind.dk eller til Klaus Schmidt. Invitationen kan downloades på siden med kommende kurser.'),
+    ],
+    linkLabel: 'Se det kommende PicoScope-kursus',
+    linkHref: '/kommende-kurser',
     order: 5,
   },
   {
     _id: 'seo-support',
     _type: 'seoText',
     title: 'Teknisk support til værksteder',
-    text: 'Når elbilen kræver mere end en fejlkode, giver AutoMind teknisk support. Det er faglig sparring til værksteder om elbilens systemer, diagnostik og fejlfinding.',
+    intro: 'Teknisk support fra AutoMind i Hjørring er faglig sparring til værksteder, når elbilen kræver mere end en fejlkode. Det handler om elbilens systemer, diagnostik og fejlfinding.\n\nDu behøver ikke stå alene med fejlen. Supporten er til værksteder, der arbejder med elbiler.',
+    sections: [
+      seoSection('opgave', 'Den konkrete opgave', 'Samtalen tager udgangspunkt i bilens symptomer, dine observationer og den fejlfinding, værkstedet allerede har udført. Målet er et tydeligt næste skridt på den sag, I står med.'),
+      seoSection('systemer', 'Fejlfinding og systemforståelse', 'Sparringen dækker fejlfinding på elbilens systemer og den tekniske forståelse, opgaven kræver. Skriv til AutoMind, når I vil have en faglig dialog om sagen.'),
+    ],
+    linkLabel: 'Læs om teknisk support',
+    linkHref: '/teknisk-support',
     order: 6,
   },
   {
     _id: 'seo-hjoerring',
     _type: 'seoText',
     title: 'AutoMind i Hjørring',
-    text: 'AutoMind har base i Hjørring. Herfra tilbydes elbilkurser til mekanikere og teknisk support til værksteder, der arbejder med elbiler.',
+    intro: 'AutoMind har base i Hjørring. Herfra holder vi elbilkurser for mekanikere og giver teknisk support til værksteder, der arbejder med elbiler.\n\nKurser og sparring ligger tæt på hverdagen i autobranchen, så viden og hjælp kan bruges på værkstedet.',
+    sections: [
+      seoSection('kurser', 'Kurser fra basen i Hjørring', 'Kurserne er for værksteder og mekanikere, der vil styrke deres viden om elbiler. Undervisningen foregår i AutoMinds lokaler, tæt på biler og udstyr.'),
+      seoSection('support', 'Support samme sted', 'Teknisk support er den anden del af arbejdet i Hjørring. Værkstedet kan få faglig sparring, når en elbil-opgave kræver mere end det, I allerede har prøvet.'),
+    ],
+    linkLabel: 'Læs om AutoMind',
+    linkHref: '/om-automind',
     order: 7,
   },
   {
     _id: 'seo-maalgruppe',
     _type: 'seoText',
     title: 'Hvem kurserne er til',
-    text: 'Kurserne er til værksteder og mekanikere, der vil styrke deres viden om elbiler. AutoMind tager udgangspunkt i værkstedets behov, niveau og ønsker til forløbet.',
+    intro: 'Kurserne hos AutoMind i Hjørring er til værksteder og mekanikere, der vil styrke deres viden om elbiler. De tager udgangspunkt i de opgaver, værkstedet allerede har.\n\nAutoMind lægger forløbet efter jeres behov, niveau og ønsker.',
+    sections: [
+      seoSection('mekanikere', 'Mekanikere på værkstedet', 'Undervisningen er til dem, der arbejder med bilerne. Elbilen stiller nye krav, og kurset skal kunne bruges på den næste opgave, ikke kun høres.'),
+      seoSection('vaerksted', 'Værkstedets eget forløb', 'I kan tale med AutoMind om, hvad I vil blive bedre til. Samtalen handler om kompetencer, kursusforløb og det, netop jeres værksted har brug for.'),
+    ],
+    linkLabel: 'Se kurserne til mekanikere og værksteder',
+    linkHref: '/kurser',
     order: 8,
   },
   {
     _id: 'seo-kontakt',
     _type: 'seoText',
     title: 'Kontakt og tilmelding',
-    text: 'Kontakt AutoMind om kurser, datoer, indhold og teknisk support. Skriv til Mads Budolfsen på mads@automind.dk. En henvendelse starter med en faglig dialog om værkstedets opgave.',
+    intro: 'Kontakt AutoMind i Hjørring om elbilkurser og teknisk support. Skriv til Mads Budolfsen på mads@automind.dk. En henvendelse starter med en faglig dialog om værkstedets opgave.\n\nDet kan være et kursus, I vil høre nærmere om, eller en elbil der driller.',
+    sections: [
+      seoSection('tilmelding', 'Kurser og tilmelding', 'Skriv, hvis I vil høre om aktuelle kursusforløb, indhold og tilmelding. Datoer og priser aftales i dialogen. De står ikke som en fast liste.'),
+      seoSection('opgave', 'En konkret elbil-opgave', 'I kan også skrive om teknisk support. Beskriv symptomerne og den fejlfinding, I allerede har lavet, så samtalen kan starte der.'),
+    ],
+    linkLabel: 'Gå til kontakt',
+    linkHref: '/kontakt',
     order: 9,
   },
   {
     _id: 'seo-backup',
     _type: 'seoText',
     title: 'Faglig backup til værkstedet',
-    text: 'AutoMind er faglig backup, når opgaven driller. Kurser og teknisk support ligger tæt på praksis, så mekanikeren ikke står alene med fejlen på elbilen.',
+    intro: 'AutoMind er faglig backup til værksteder, der arbejder med elbiler. Når opgaven driller, er der kurser og teknisk support tæt på praksis, så mekanikeren ikke står alene med fejlen.\n\nBackuppen har base i Hjørring og bruges, når værkstedet har brug for en faglig sparringspartner.',
+    sections: [
+      seoSection('fejlen', 'Når fejlen ikke er løst', 'Teknisk sparring tager fat i elbilens systemer, diagnostik og den fejlfinding, der allerede er gjort. Formålet er at finde næste skridt, ikke at gentage en fejlkode.'),
+      seoSection('viden', 'Viden I kan bruge bagefter', 'Kurserne er den anden del af backuppen. De giver mekanikeren viden om højvolt, batteristyring, ladesystemer og systematisk fejlfinding, som kan bruges på værkstedet dagen efter.'),
+    ],
+    linkLabel: 'Få faglig backup',
+    linkHref: '/teknisk-support',
     order: 10,
   },
 ]

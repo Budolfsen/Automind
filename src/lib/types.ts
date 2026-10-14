@@ -97,10 +97,18 @@ export type SiteSettings = {
   socialLinks: SocialLink[]
 }
 
+export type SeoSection = {
+  heading: string
+  text: string
+}
+
 export type SeoText = {
   _id: string
   title: string
-  text: string
+  intro: string
+  sections: SeoSection[]
+  linkLabel: string
+  linkHref: string
   order: number
 }
 
