@@ -24,9 +24,25 @@ const lcp = lcpImage?.asset
   ? responsiveImage(lcpImage.asset._id, lcpImage.asset.width, heroImageWidths)
   : null
 const extra = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []
+const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
 const json = JSON.stringify({
   '@context': 'https://schema.org',
-  '@graph': [organizationNode(settings, Astro.site?.href ?? 'https://automind.dk'), ...extra],
+  '@graph': [
+    organizationNode(settings, siteUrl),
+    {
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: canonical.href,
+      inLanguage: 'da',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: settings.companyName,
+        url: siteUrl,
+      },
+    },
+    ...extra,
+  ],
 }).replace(/</g, '\\u003c')
 ---
 

@@ -7,7 +7,11 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/invitation/'),
+    }),
+  ],
   image: {
     domains: ['cdn.sanity.io'],
   },

@@ -1,0 +1,20 @@
+# AutoMind
+
+AutoMind i Hjørring holder elbilkurser for mekanikere og værksteder og giver teknisk support til fejlfinding på elbiler.
+
+## Sider
+
+- Forside: https://automind.dk/
+  Elbilkurser og teknisk support. Højvoltssikkerhed, BMS, ladesystemer og diagnostik.
+- Kurser: https://automind.dk/kurser/
+  Faglig uddannelse om højvoltssikkerhed, BMS, ladesystemer og systematisk fejlfinding.
+- Kommende kurser: https://automind.dk/kommende-kurser/
+  Aktuelle forløb, herunder avanceret PicoScope med Klaus Schmidt og Mads Budolfsen.
+- Teknisk support: https://automind.dk/teknisk-support/
+  Faglig sparring til værksteder om elbilens systemer, diagnostik og fejlfinding.
+- Om AutoMind: https://automind.dk/om-automind/
+  Faglig backup til værksteder fra Hjørring, med kurser og teknisk support.
+- Kontakt: https://automind.dk/kontakt/
+  Skriv til Mads Budolfsen på mads@automind.dk.
+
+Invitationer til enkelte kurser er ikke beregnet til indeksering.
