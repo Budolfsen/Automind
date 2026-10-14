@@ -8,6 +8,7 @@ const pages = [
   ['Teknisk support', 'https://automind.dk/teknisk-support/'],
   ['Om AutoMind', 'https://automind.dk/om-automind/'],
   ['Kontakt', 'https://automind.dk/kontakt/'],
+  ['Faglige emner', 'https://automind.dk/emner/'],
 ]
 
 export const GET: APIRoute = async () => {
@@ -23,7 +24,14 @@ export const GET: APIRoute = async () => {
     '',
     '## Emner',
     '',
-    ...texts.flatMap((text) => [`### ${text.title}`, '', text.text, '']),
+    ...texts.flatMap((text) => [
+      `### ${text.title}`,
+      '',
+      `https://automind.dk/emner/#${text._id}`,
+      '',
+      text.text,
+      '',
+    ]),
     'Invitationer til enkelte kurser er ikke beregnet til indeksering.',
     '',
   ]

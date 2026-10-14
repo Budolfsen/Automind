@@ -50,6 +50,7 @@ export const PAGE_QUERY = `*[_type == "page" && slug.current == $slug][0]{
 }`
 
 export const SEO_TEXTS_QUERY = `*[_type == "seoText"] | order(order asc){
+  _id,
   title,
   text,
   order

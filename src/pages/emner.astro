@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../components/BaseLayout.astro'
+import PageIntro from '../components/PageIntro.astro'
+import { getSeoTexts } from '../lib/content'
+import { seoTextList } from '../lib/seo'
+
+const texts = await getSeoTexts()
+---
+
+<BaseLayout
+  title="Elbilkurser og teknisk support — AutoMind · Hjørring"
+  description="AutoMind i Hjørring holder elbilkurser for mekanikere og giver værksteder teknisk support til fejlfinding, højvolt, BMS og diagnostik."
+  jsonLd={texts.length > 0 ? seoTextList(texts) : undefined}
+>
+  <PageIntro
+    eyebrow="AutoMind · Hjørring"
+    title="Elbilkurser og teknisk support"
+    description="AutoMind holder elbilkurser for mekanikere og værksteder og giver teknisk support til fejlfinding på elbiler."
+  />
+  <section class="site-width page-bottom topic-list">
+    {texts.map((text) => (
+      <article id={text._id}>
+        <h2>{text.title}</h2>
+        <p class="body-copy">{text.text}</p>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

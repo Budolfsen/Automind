@@ -530,6 +530,18 @@ details[open] .when-open {
   padding-bottom: var(--space-page-bottom);
 }
 
+.topic-list {
+  display: grid;
+  gap: var(--space-section);
+}
+
+.topic-list h2 {
+  font-size: var(--step-section);
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 36rem;
+}
+
 .wide-photo {
   width: 100%;
   aspect-ratio: 16 / 7;

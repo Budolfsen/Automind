@@ -98,6 +98,7 @@ export type SiteSettings = {
 }
 
 export type SeoText = {
+  _id: string
   title: string
   text: string
   order: number
