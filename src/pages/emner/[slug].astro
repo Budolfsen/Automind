@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../components/BaseLayout.astro'
 import PageIntro from '../../components/PageIntro.astro'
+import SanityImage from '../../components/SanityImage.astro'
 import { getSeoText, getSeoTexts } from '../../lib/content'
 import { proseParagraphs } from '../../lib/seo'
 
@@ -15,9 +16,18 @@ const text = await getSeoText(slug)
 const [lead, ...rest] = proseParagraphs(text.intro)
 ---
 
-<BaseLayout title={`${text.title} — AutoMind · Hjørring`} description={lead ?? text.title}>
+<BaseLayout title={`${text.title} — AutoMind · Hjørring`} description={lead ?? text.title} image={text.image}>
   <PageIntro eyebrow="AutoMind · Hjørring" title={text.title} description={lead ?? ''} />
   <article class="site-width page-bottom topic-list">
+    {text.image?.asset && (
+      <SanityImage
+        image={text.image}
+        class="wide-photo"
+        sizes="(min-width: 1180px) 1180px, calc(100vw - 2.2rem)"
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
     {rest.map((paragraph) => <p class="body-copy">{paragraph}</p>)}
     {text.sections.map((section) => (
       <div>

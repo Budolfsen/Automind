@@ -53,6 +53,7 @@ const seoTextFields = `{
   _id,
   title,
   "slug": slug.current,
+  image${figure},
   intro,
   sections[]{ heading, text },
   linkLabel,

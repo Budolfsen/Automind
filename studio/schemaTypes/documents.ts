@@ -81,6 +81,7 @@ export const seoText = defineType({
   fields: [
     defineField({ name: 'title', title: 'Titel', type: 'string', validation: (rule) => rule.required() }),
     defineField({ name: 'slug', title: 'Adresse', type: 'slug', options: { source: 'title' }, validation: (rule) => rule.required() }),
+    defineField({ name: 'image', title: 'Billede', type: 'figure', validation: (rule) => rule.required() }),
     defineField({ name: 'intro', title: 'Indledning', type: 'text', rows: 8, validation: (rule) => rule.required() }),
     defineField({
       name: 'sections',

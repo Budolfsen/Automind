@@ -342,6 +342,41 @@ function seoSection(key, heading, text) {
   return { _key: key, _type: 'object', heading, text }
 }
 
+const seoImageSpecs = {
+  'seo-elbilkurser': ['AutoMind_2026-68.webp', 'Undervisningspladser tæt på bilerne under elbilkursus hos AutoMind i Hjørring'],
+  'seo-hoejvolt': ['AutoMind_2026-19.webp', 'Højvoltsarbejde på en elbil i AutoMinds værksted i Hjørring'],
+  'seo-bms': ['AutoMind_2026-47.webp', 'Teknisk udstyr til arbejde med elbilens batteri hos AutoMind i Hjørring'],
+  'seo-diagnostik': ['AutoMind_2026-55.webp', 'Diagnose- og måleudstyr til fejlfinding hos AutoMind i Hjørring'],
+  'seo-picoscope': ['AutoMind_2026-55.webp', 'Måleinstrumenter til fejlfinding på PicoScope-kurset hos AutoMind i Hjørring'],
+  'seo-support': ['AutoMind_2026-39.webp', 'Biler på lifte i AutoMinds værksted i Hjørring'],
+  'seo-hjoerring': ['AutoMind_2026-58.webp', 'Elbiler samlet i AutoMinds lokaler i Hjørring'],
+  'seo-maalgruppe': ['AutoMind_2026-1.webp', 'Undervisningslokale til elbilkursus hos AutoMind i Hjørring'],
+  'seo-kontakt': ['AutoMind_2026-44.webp', 'AutoMinds lokaler i Hjørring'],
+  'seo-backup': ['AutoMind_2026-7.webp', 'AutoMinds værksted med elbiler i Hjørring'],
+}
+
+function attachSeoImages(docs, assets) {
+  return docs.map((doc) => {
+    const spec = seoImageSpecs[doc._id]
+    if (!spec) return doc
+    const [filename, alt] = spec
+    return { ...doc, image: ref(assets, filename, alt) }
+  })
+}
+
+async function assetsByFilename(filenames) {
+  const unique = [...new Set(filenames)]
+  const rows = await client.fetch(
+    `*[_type == "sanity.imageAsset" && originalFilename in $filenames]{ _id, originalFilename }`,
+    { filenames: unique },
+  )
+  const assets = new Map(rows.map((row) => [row.originalFilename, row._id]))
+  for (const filename of unique) {
+    if (!assets.get(filename)) throw new Error(`Billedet ${filename} findes ikke i Sanity`)
+  }
+  return assets
+}
+
 const seoTexts = [
   {
     _id: 'seo-elbilkurser',
@@ -486,7 +521,8 @@ const seoTexts = [
 ]
 
 if (process.argv.includes('--seo-only')) {
-  for (const doc of seoTexts) {
+  const assets = await assetsByFilename(Object.values(seoImageSpecs).map(([filename]) => filename))
+  for (const doc of attachSeoImages(seoTexts, assets)) {
     await client.createOrReplace(doc)
     console.log('SEO:', doc._id)
   }
@@ -495,7 +531,7 @@ if (process.argv.includes('--seo-only')) {
 
 const assets = await uploadImages()
 const posterId = await uploadPoster()
-const docs = [...documents(assets, posterId), ...seoTexts]
+const docs = [...documents(assets, posterId), ...attachSeoImages(seoTexts, assets)]
 for (const doc of docs) {
   await client.createOrReplace(doc)
   console.log('Dokument:', doc._id)
