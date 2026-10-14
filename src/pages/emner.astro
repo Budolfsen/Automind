@@ -2,34 +2,27 @@
 import BaseLayout from '../components/BaseLayout.astro'
 import PageIntro from '../components/PageIntro.astro'
 import { getSeoTexts } from '../lib/content'
-import { proseParagraphs, seoTextList } from '../lib/seo'
+import { seoTextList } from '../lib/seo'
 
 const texts = await getSeoTexts()
+const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
 ---
 
 <BaseLayout
   title="Elbilkurser og teknisk support — AutoMind · Hjørring"
   description="AutoMind i Hjørring holder elbilkurser for mekanikere og giver værksteder teknisk support til fejlfinding, højvolt, BMS og diagnostik."
-  jsonLd={texts.length > 0 ? seoTextList(texts) : undefined}
+  jsonLd={texts.length > 0 ? seoTextList(texts, siteUrl) : undefined}
 >
   <PageIntro
     eyebrow="AutoMind · Hjørring"
     title="Elbilkurser og teknisk support"
     description="AutoMind holder elbilkurser for mekanikere og værksteder og giver teknisk support til fejlfinding på elbiler."
   />
-  <section class="site-width page-bottom topic-list">
-    {texts.map((text) => (
-      <article id={text._id}>
-        <h2>{text.title}</h2>
-        {proseParagraphs(text.intro).map((paragraph) => <p class="body-copy">{paragraph}</p>)}
-        {text.sections.map((section) => (
-          <div>
-            <h3>{section.heading}</h3>
-            {proseParagraphs(section.text).map((paragraph) => <p class="body-copy">{paragraph}</p>)}
-          </div>
-        ))}
-        <p class="body-copy"><a href={text.linkHref}>{text.linkLabel}</a></p>
-      </article>
-    ))}
-  </section>
+  <nav class="site-width page-bottom" aria-label="Faglige emner">
+    <ul class="topic-index">
+      {texts.map((text) => (
+        <li><a href={`/emner/${text.slug}/`}>{text.title}</a></li>
+      ))}
+    </ul>
+  </nav>
 </BaseLayout>

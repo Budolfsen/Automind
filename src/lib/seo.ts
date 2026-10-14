@@ -33,19 +33,15 @@ export function proseParagraphs(text: string) {
   return text.split(/\n\s*\n/).map((part) => part.trim()).filter(Boolean)
 }
 
-export function seoTextList(texts: SeoText[]) {
+export function seoTextList(texts: SeoText[], siteUrl: string) {
   return {
     '@type': 'ItemList',
     name: 'Elbilkurser og teknisk support',
     itemListElement: texts.map((text, index) => ({
       '@type': 'ListItem',
       position: text.order || index + 1,
-      item: {
-        '@type': 'Thing',
-        name: text.title,
-        description: [text.intro, ...text.sections.map((section) => `${section.heading}. ${section.text}`)].join(' '),
-        inLanguage: 'da',
-      },
+      name: text.title,
+      url: new URL(`emner/${text.slug}/`, siteUrl).href,
     })),
   }
 }

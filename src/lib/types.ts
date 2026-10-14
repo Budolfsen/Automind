@@ -105,6 +105,7 @@ export type SeoSection = {
 export type SeoText = {
   _id: string
   title: string
+  slug: string
   intro: string
   sections: SeoSection[]
   linkLabel: string

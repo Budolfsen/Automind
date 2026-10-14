@@ -346,6 +346,7 @@ const seoTexts = [
   {
     _id: 'seo-elbilkurser',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'elbilkurser' },
     title: 'Elbilkurser for mekanikere og værksteder',
     intro: 'Et elbilkursus hos AutoMind i Hjørring er for mekanikere og værksteder, der arbejder med elbiler. Undervisningen tager udgangspunkt i hverdagen på værkstedet, så det, I lærer om elbilens systemer, kan bruges på den næste opgave.\n\nElbilen stiller nye krav til mekanikeren. Derfor aftaler I forløb og indhold med AutoMind ud fra det, jeres værksted har brug for. Aktuelle datoer og priser hører med i den samtale.',
     sections: [
@@ -359,6 +360,7 @@ const seoTexts = [
   {
     _id: 'seo-hoejvolt',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'hoejvoltssikkerhed' },
     title: 'Højvoltssikkerhed i praksis',
     intro: 'Højvoltssikkerhed i praksis er et elbilkursus hos AutoMind i Hjørring. Mekanikeren lærer, hvad der kræves for at arbejde sikkert med elbilens højvoltssystemer, i de situationer værkstedet møder.\n\nKurset handler om sikkerhed i arbejdet. Det er ikke en gennemgang, der slipper opgaven på værkstedet.',
     sections: [
@@ -372,6 +374,7 @@ const seoTexts = [
   {
     _id: 'seo-bms',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'bms-og-ladesystemer' },
     title: 'BMS og ladesystemer',
     intro: 'AutoMind underviser mekanikere i BMS og ladesystemer. Forløbet i Hjørring giver en bedre forståelse af batteristyring, ladning og den systematiske fejlfinding, der hører til på elbiler.\n\nKurset er til værksteder, der vil kunne følge batteriet og ladningen, når bilen ikke opfører sig, som den skal.',
     sections: [
@@ -385,6 +388,7 @@ const seoTexts = [
   {
     _id: 'seo-diagnostik',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'diagnostik' },
     title: 'Diagnostik og systematisk fejlfinding',
     intro: 'Diagnostik hos AutoMind handler om mere end en fejlkode. I Hjørring arbejder værkstedet med symptomer, observationer og den fejlfinding, der allerede er udført, så næste skridt bliver tydeligt.\n\nDen tilgang bruges både på kurserne og, når opgaven driller, i den tekniske sparring.',
     sections: [
@@ -398,6 +402,7 @@ const seoTexts = [
   {
     _id: 'seo-picoscope',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'picoscope' },
     title: 'Avanceret PicoScope-kursus',
     intro: 'Det avancerede PicoScope-kursus hos AutoMind er to dage med Klaus Schmidt og Mads Budolfsen. Invitation og tilmelding ligger på siden med kommende kurser.\n\nKurset er lagt an på et højt tempo, med tricks der skal gøre hverdagen på værkstedet lettere.',
     sections: [
@@ -411,6 +416,7 @@ const seoTexts = [
   {
     _id: 'seo-support',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'teknisk-support' },
     title: 'Teknisk support til værksteder',
     intro: 'Teknisk support fra AutoMind i Hjørring er faglig sparring til værksteder, når elbilen kræver mere end en fejlkode. Det handler om elbilens systemer, diagnostik og fejlfinding.\n\nDu behøver ikke stå alene med fejlen. Supporten er til værksteder, der arbejder med elbiler.',
     sections: [
@@ -424,6 +430,7 @@ const seoTexts = [
   {
     _id: 'seo-hjoerring',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'hjoerring' },
     title: 'AutoMind i Hjørring',
     intro: 'AutoMind har base i Hjørring. Herfra holder vi elbilkurser for mekanikere og giver teknisk support til værksteder, der arbejder med elbiler.\n\nKurser og sparring ligger tæt på hverdagen i autobranchen, så viden og hjælp kan bruges på værkstedet.',
     sections: [
@@ -437,6 +444,7 @@ const seoTexts = [
   {
     _id: 'seo-maalgruppe',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'hvem-kurserne-er-til' },
     title: 'Hvem kurserne er til',
     intro: 'Kurserne hos AutoMind i Hjørring er til værksteder og mekanikere, der vil styrke deres viden om elbiler. De tager udgangspunkt i de opgaver, værkstedet allerede har.\n\nAutoMind lægger forløbet efter jeres behov, niveau og ønsker.',
     sections: [
@@ -450,6 +458,7 @@ const seoTexts = [
   {
     _id: 'seo-kontakt',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'kontakt' },
     title: 'Kontakt og tilmelding',
     intro: 'Kontakt AutoMind i Hjørring om elbilkurser og teknisk support. Skriv til Mads Budolfsen på mads@automind.dk. En henvendelse starter med en faglig dialog om værkstedets opgave.\n\nDet kan være et kursus, I vil høre nærmere om, eller en elbil der driller.',
     sections: [
@@ -463,6 +472,7 @@ const seoTexts = [
   {
     _id: 'seo-backup',
     _type: 'seoText',
+    slug: { _type: 'slug', current: 'faglig-backup' },
     title: 'Faglig backup til værkstedet',
     intro: 'AutoMind er faglig backup til værksteder, der arbejder med elbiler. Når opgaven driller, er der kurser og teknisk support tæt på praksis, så mekanikeren ikke står alene med fejlen.\n\nBackuppen har base i Hjørring og bruges, når værkstedet har brug for en faglig sparringspartner.',
     sections: [

@@ -28,7 +28,7 @@ export const GET: APIRoute = async () => {
     ...texts.flatMap((text) => [
       `### ${text.title}`,
       '',
-      `https://automind.dk/emner/#${text._id}`,
+      `https://automind.dk/emner/${text.slug}/`,
       '',
       ...proseParagraphs(text.intro).flatMap((paragraph) => [paragraph, '']),
       ...text.sections.flatMap((section) => [

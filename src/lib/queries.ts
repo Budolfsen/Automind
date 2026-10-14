@@ -49,15 +49,20 @@ export const PAGE_QUERY = `*[_type == "page" && slug.current == $slug][0]{
   promptCard{ eyebrow, title, text, ctaLabel, ctaHref }
 }`
 
-export const SEO_TEXTS_QUERY = `*[_type == "seoText"] | order(order asc){
+const seoTextFields = `{
   _id,
   title,
+  "slug": slug.current,
   intro,
   sections[]{ heading, text },
   linkLabel,
   linkHref,
   order
 }`
+
+export const SEO_TEXTS_QUERY = `*[_type == "seoText"] | order(order asc)${seoTextFields}`
+
+export const SEO_TEXT_QUERY = `*[_type == "seoText" && slug.current == $slug][0]${seoTextFields}`
 
 export const COURSES_QUERY = `*[_type == "course"] | order(order asc){
   _id,

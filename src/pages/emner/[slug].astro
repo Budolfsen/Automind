@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../components/BaseLayout.astro'
+import PageIntro from '../../components/PageIntro.astro'
+import { getSeoText, getSeoTexts } from '../../lib/content'
+import { proseParagraphs } from '../../lib/seo'
+
+export async function getStaticPaths() {
+  const texts = await getSeoTexts()
+  return texts.map((text) => ({ params: { slug: text.slug } }))
+}
+
+const slug = Astro.params.slug
+if (!slug) throw new Error('SEO-tekst mangler adresse')
+const text = await getSeoText(slug)
+const [lead, ...rest] = proseParagraphs(text.intro)
+---
+
+<BaseLayout title={`${text.title} — AutoMind · Hjørring`} description={lead ?? text.title}>
+  <PageIntro eyebrow="AutoMind · Hjørring" title={text.title} description={lead ?? ''} />
+  <article class="site-width page-bottom topic-list">
+    {rest.map((paragraph) => <p class="body-copy">{paragraph}</p>)}
+    {text.sections.map((section) => (
+      <div>
+        <h2>{section.heading}</h2>
+        {proseParagraphs(section.text).map((paragraph) => <p class="body-copy">{paragraph}</p>)}
+      </div>
+    ))}
+    <p class="body-copy"><a href={text.linkHref}>{text.linkLabel}</a></p>
+    <p class="body-copy"><a href="/emner/">Alle faglige emner</a></p>
+  </article>
+</BaseLayout>
