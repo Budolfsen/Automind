@@ -1,0 +1,17 @@
+---
+import type { Topic } from '../lib/types'
+
+interface Props {
+  topic: Topic
+}
+
+const { topic } = Astro.props
+---
+
+<div class="topic-row">
+  <div>
+    <h2>{topic.title}</h2>
+    <p>{topic.text}</p>
+  </div>
+  <a class="text-link" href={topic.href} aria-label={topic.title}><span aria-hidden="true">→</span></a>
+</div>

@@ -1,0 +1,33 @@
+---
+import Button from './Button.astro'
+import type { Course } from '../lib/types'
+
+interface Props {
+  course: Course
+  mode?: 'link' | 'details'
+  level?: 2 | 3
+}
+
+const { course, mode = 'link', level = 3 } = Astro.props
+const Title = level === 2 ? 'h2' : 'h3'
+---
+
+<article class="course-card">
+  <p class="eyebrow">{course.category}</p>
+  <Title>{course.title}</Title>
+  <p>{course.description}</p>
+  {mode === 'link' ? (
+    <a class="text-link" href="/kurser">Læs mere <span aria-hidden="true">→</span></a>
+  ) : (
+    <details>
+      <summary class="button button--ghost course-toggle">
+        <span class="when-closed">Om kursusområdet</span>
+        <span class="when-open">Vis mindre</span>
+      </summary>
+      <div class="course-detail">
+        <p>{course.detail}</p>
+        <Button href="/kontakt" variant="frost">Spørg om kurser</Button>
+      </div>
+    </details>
+  )}
+</article>

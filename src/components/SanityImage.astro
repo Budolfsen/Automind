@@ -1,0 +1,40 @@
+---
+import { responsiveImage } from '../lib/images'
+import type { Figure } from '../lib/types'
+
+interface Props {
+  image: Figure
+  sizes: string
+  class?: string
+  loading?: 'eager' | 'lazy'
+  fetchpriority?: 'high' | 'low' | 'auto'
+  widths?: number[]
+  ratio?: number
+}
+
+const {
+  image,
+  sizes,
+  class: className,
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  widths = [480, 600, 720, 960, 1280, 1600],
+  ratio,
+} = Astro.props
+
+const asset = image.asset
+const picture = asset ? responsiveImage(asset._id, asset.width, widths, ratio) : null
+---
+
+{asset && picture && <img
+  class={className}
+  src={picture.src}
+  srcset={picture.srcset}
+  sizes={sizes}
+  alt={image.alt}
+  width={asset.width}
+  height={asset.height}
+  loading={loading}
+  decoding={fetchpriority === 'high' ? 'sync' : 'async'}
+  fetchpriority={fetchpriority}
+/>}

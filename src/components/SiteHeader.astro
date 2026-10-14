@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro'
+import Logo from './Logo.astro'
+import type { SiteSettings } from '../lib/types'
+
+interface Props {
+  settings: SiteSettings
+}
+
+const { settings } = Astro.props
+const path = Astro.url.pathname
+---
+
+<header class="site-header">
+  <a class="skip-link" href="#indhold">Spring til indhold</a>
+  <div class="site-width header-inner">
+    <a href="/" aria-label={`${settings.companyName} — Forside`}>
+      <Logo />
+    </a>
+    <nav class="desktop-nav" aria-label="Hovedmenu">
+      {settings.navigation.map((item) => (
+        <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+    <Button href="/kontakt" variant="frost" class="header-contact">{settings.contactLabel}</Button>
+    <details class="mobile-nav">
+      <summary class="mobile-toggle" aria-label="Menu">
+        <span></span>
+      </summary>
+      <nav class="mobile-panel" aria-label="Mobilmenu">
+        {settings.navigation.map((item) => (
+          <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+        ))}
+      </nav>
+    </details>
+  </div>
+</header>

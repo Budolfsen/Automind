@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../components/BaseLayout.astro'
+import CourseGrid from '../components/CourseGrid.astro'
+import Notice from '../components/Notice.astro'
+import PageIntro from '../components/PageIntro.astro'
+import PhotoGrid from '../components/PhotoGrid.astro'
+import SanityImage from '../components/SanityImage.astro'
+import { getCourses, getPage } from '../lib/content'
+
+const page = await getPage('kurser')
+const courses = await getCourses()
+---
+
+<BaseLayout title={page.seoTitle} description={page.seoDescription} image={page.ogImage ?? page.heroImage}>
+  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={page.intro} />
+  <section class="site-width page-bottom">
+    {page.heroImage && (
+      <SanityImage
+        image={page.heroImage}
+        class="wide-photo"
+        sizes="(min-width: 1180px) 1180px, calc(100vw - 2.2rem)"
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
+    <CourseGrid courses={courses} mode="details" prompt={page.promptCard} level={2} />
+    {page.notice && <Notice text={page.notice} />}
+    <PhotoGrid figures={page.gallery} />
+  </section>
+</BaseLayout>

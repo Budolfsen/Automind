@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../components/BaseLayout.astro'
+import Button from '../components/Button.astro'
+import DiagnosticPanel from '../components/DiagnosticPanel.astro'
+import PageIntro from '../components/PageIntro.astro'
+import PhotoGrid from '../components/PhotoGrid.astro'
+import SupportList from '../components/SupportList.astro'
+import TextLines from '../components/TextLines.astro'
+import { getPage } from '../lib/content'
+
+const page = await getPage('teknisk-support')
+const section = page.sections[0]
+---
+
+<BaseLayout title={page.seoTitle} description={page.seoDescription} image={page.ogImage ?? page.gallery[0]}>
+  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={page.intro} />
+  <section class="site-width page-bottom">
+    {section?.heading && (
+      <div class="support-grid">
+        <div>
+          <h2 class="section-heading"><TextLines text={section.heading} /></h2>
+          {section.body && <p class="body-copy">{section.body}</p>}
+          <SupportList items={section.items ?? []} />
+          {section.ctaHref && section.ctaLabel && (
+            <div class="section-actions">
+              <Button href={section.ctaHref} variant="frost">{section.ctaLabel}</Button>
+            </div>
+          )}
+        </div>
+        <DiagnosticPanel />
+      </div>
+    )}
+    <PhotoGrid figures={page.gallery} priorityFirst />
+  </section>
+</BaseLayout>

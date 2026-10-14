@@ -1,0 +1,17 @@
+---
+import PhotoFigure from './PhotoFigure.astro'
+import type { Figure } from '../lib/types'
+
+interface Props {
+  figures: Figure[]
+  priorityFirst?: boolean
+}
+
+const { figures, priorityFirst = false } = Astro.props
+---
+
+{figures.length > 0 && (
+  <div class="photo-grid">
+    {figures.map((figure, index) => <PhotoFigure figure={figure} priority={priorityFirst && index === 0} />)}
+  </div>
+)}

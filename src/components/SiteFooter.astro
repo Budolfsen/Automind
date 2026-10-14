@@ -1,0 +1,30 @@
+---
+import Logo from './Logo.astro'
+import SocialLinks from './SocialLinks.astro'
+import type { SiteSettings } from '../lib/types'
+
+interface Props {
+  settings: SiteSettings
+}
+
+const { settings } = Astro.props
+---
+
+<footer class="footer">
+  <div class="site-width footer-inner">
+    <div>
+      <a href="/" aria-label={`${settings.companyName} forside`}>
+        <Logo />
+      </a>
+      <p class="footer-copy">{settings.footerText}</p>
+      <a class="text-link footer-mail" href={`mailto:${settings.email}`}>{settings.email}</a>
+      <SocialLinks links={settings.socialLinks} />
+    </div>
+    <nav class="footer-links" aria-label="Sidefod">
+      {settings.navigation.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+      <a href="/kontakt">{settings.contactLabel}</a>
+    </nav>
+  </div>
+</footer>

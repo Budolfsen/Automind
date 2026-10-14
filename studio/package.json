@@ -1,0 +1,17 @@
+{
+  "name": "automind-studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "sanity": "^6.18.0",
+    "sanity-plugin-media": "^4.3.6",
+    "styled-components": "^6.1.19"
+  }
+}

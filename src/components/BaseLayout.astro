@@ -1,0 +1,77 @@
+---
+import Font from 'astro/components/Font.astro'
+import '../styles/global.css'
+import SiteFooter from './SiteFooter.astro'
+import SiteHeader from './SiteHeader.astro'
+import { getSettings } from '../lib/content'
+import { heroImageSizes, heroImageWidths, imageSrc, responsiveImage } from '../lib/images'
+import { organizationNode } from '../lib/seo'
+import type { Figure } from '../lib/types'
+
+interface Props {
+  title: string
+  description: string
+  image?: Figure | null
+  lcpImage?: Figure | null
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[]
+}
+
+const { title, description, image = null, lcpImage = null, jsonLd } = Astro.props
+const settings = await getSettings()
+const canonical = new URL(Astro.url.pathname, Astro.site)
+const ogImage = image?.asset ? imageSrc(image.asset._id, 1200) : undefined
+const lcp = lcpImage?.asset
+  ? responsiveImage(lcpImage.asset._id, lcpImage.asset.width, heroImageWidths)
+  : null
+const extra = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : []
+const json = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [organizationNode(settings, Astro.site?.href ?? 'https://automind.dk'), ...extra],
+}).replace(/</g, '\\u003c')
+---
+
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="google-site-verification" content="ghVz9lF_FwFENsHoppPN25A00lOCHf3sGg0BMtoSGnM" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#12141c" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:locale" content="da_DK" />
+    <meta property="og:site_name" content={settings.companyName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <script type="application/ld+json" set:html={json} />
+    {lcp && (
+      <link
+        rel="preload"
+        as="image"
+        href={lcp.src}
+        imagesrcset={lcp.srcset}
+        imagesizes={heroImageSizes}
+        fetchpriority="high"
+      />
+    )}
+    <Font cssVariable="--font-display" />
+    <Font cssVariable="--font-sans" />
+    <Font cssVariable="--font-mono" />
+  </head>
+  <body>
+    <SiteHeader settings={settings} />
+    <main id="indhold">
+      <slot />
+    </main>
+    <SiteFooter settings={settings} />
+  </body>
+</html>

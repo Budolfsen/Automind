@@ -1,0 +1,27 @@
+{
+  "name": "automind",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "seed": "node --env-file=.env studio/scripts/seed.mjs",
+    "studio": "npm run dev --prefix studio"
+  },
+  "dependencies": {
+    "@astrojs/check": "0.9.10",
+    "@astrojs/sitemap": "^3.6.1",
+    "@sanity/client": "^7.17.0",
+    "@sanity/image-url": "^2.0.3",
+    "astro": "7.3.7",
+    "groq": "^5.14.1",
+    "jpeg-js": "^0.4.4",
+    "typescript": "^5.9.3"
+  }
+}

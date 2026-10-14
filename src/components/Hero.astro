@@ -1,0 +1,47 @@
+---
+import { heroImageSizes, heroImageWidths } from '../lib/images'
+import Button from './Button.astro'
+import ExpertiseStrip from './ExpertiseStrip.astro'
+import SanityImage from './SanityImage.astro'
+import TextLines from './TextLines.astro'
+import type { Action, Figure } from '../lib/types'
+
+interface Props {
+  image: Figure
+  eyebrow: string
+  brand?: string
+  title: string
+  copy: string
+  actions: Action[]
+  expertise: string[]
+}
+
+const { image, eyebrow, brand, title, copy, actions, expertise } = Astro.props
+---
+
+<section class="hero">
+  <SanityImage
+    image={image}
+    class="hero-media"
+    sizes={heroImageSizes}
+    loading="eager"
+    fetchpriority="high"
+    widths={heroImageWidths}
+  />
+  <div class="site-width hero-inner">
+    <p class="eyebrow rise">{eyebrow}</p>
+    <h1 class="hero-title rise">
+      {brand && <span class="hero-brand">{brand}</span>}
+      <TextLines text={title} />
+    </h1>
+    <p class="hero-copy rise">{copy}</p>
+    {actions.length > 0 && (
+      <div class="hero-actions rise">
+        {actions.map((action) => (
+          <Button href={action.href} variant={action.variant} size="lg">{action.label}</Button>
+        ))}
+      </div>
+    )}
+    <ExpertiseStrip items={expertise} />
+  </div>
+</section>

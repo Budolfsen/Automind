@@ -1,0 +1,62 @@
+---
+import { attachmentPreview } from '../../lib/attachment'
+import { getUpcomingCourses } from '../../lib/content'
+
+export async function getStaticPaths() {
+  const courses = await getUpcomingCourses()
+  return courses.flatMap((course) => {
+    if (!course.attachment?.url || attachmentPreview(course.attachment) !== 'image') return []
+    return [{ params: { id: course._id }, props: { course } }]
+  })
+}
+
+const { course } = Astro.props
+const url = course.attachment?.url
+if (!url) {
+  throw new Error(`Invitation mangler for ${course._id}`)
+}
+const alt = course.attachment?.label || `Invitation til ${course.title}`
+---
+
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{alt}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: oklch(0.152 0.029 269);
+      }
+
+      body {
+        min-height: 100dvh;
+      }
+
+      main {
+        min-height: 100dvh;
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+        padding: 1.25rem;
+      }
+
+      img {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: calc(100dvh - 2.5rem);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src={url} alt={alt} />
+    </main>
+  </body>
+</html>

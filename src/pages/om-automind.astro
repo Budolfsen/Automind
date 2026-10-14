@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../components/BaseLayout.astro'
+import Button from '../components/Button.astro'
+import PageIntro from '../components/PageIntro.astro'
+import PhotoGrid from '../components/PhotoGrid.astro'
+import SanityImage from '../components/SanityImage.astro'
+import TextLines from '../components/TextLines.astro'
+import { getPage } from '../lib/content'
+
+const page = await getPage('om-automind')
+const section = page.sections[0]
+---
+
+<BaseLayout title={page.seoTitle} description={page.seoDescription} image={page.ogImage ?? page.heroImage}>
+  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={page.intro} />
+  <section class="site-width page-bottom">
+    {page.heroImage && (
+      <SanityImage
+        image={page.heroImage}
+        class="wide-photo"
+        sizes="(min-width: 1180px) 1180px, calc(100vw - 2.2rem)"
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
+    {section?.heading && (
+      <div class="support-grid section-space">
+        <div>
+          {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+          <h2 class="section-heading"><TextLines text={section.heading} /></h2>
+        </div>
+        <div>
+          {section.body && <p class="body-copy">{section.body}</p>}
+          {section.ctaHref && section.ctaLabel && (
+            <div class="section-actions">
+              <Button href={section.ctaHref} variant="frost">{section.ctaLabel}</Button>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+    <PhotoGrid figures={page.gallery} />
+  </section>
+</BaseLayout>

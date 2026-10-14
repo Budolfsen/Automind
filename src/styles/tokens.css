@@ -1,0 +1,56 @@
+/*
+ * Type: https://utopia.fyi/type/calculator?c=320,16,1.2,1180,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12
+ * Space: https://utopia.fyi/space/calculator?c=320,16,1.2,1180,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,&g=s,l,xl,12
+ * Display sizes use the same 320–1180 viewport as one-up pairs.
+ */
+
+:root {
+  --color-bg: oklch(0.152 0.029 269);
+  --color-text: oklch(0.948 0.019 273);
+  --color-primary: oklch(0.71 0.16 274);
+  --color-primary-text: oklch(0.152 0.029 269);
+  --color-secondary: oklch(0.196 0.057 270);
+  --color-muted: oklch(0.196 0.057 270);
+  --color-muted-text: oklch(0.721 0.058 273);
+  --color-accent: oklch(0.26 0.065 271);
+  --color-border: oklch(0.321 0.083 273);
+  --color-card: oklch(0.19 0.05 269);
+  --color-teal: oklch(0.838 0.127 186);
+  --color-frost: oklch(0.824 0.088 263);
+  --color-hero-shade: oklch(0.152 0.029 269 / 0.8);
+  --color-hero-clear: oklch(0.152 0.029 269 / 0.15);
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --radius: 0.5rem;
+  --radius-card: 1.125rem;
+  --radius-panel: 1.375rem;
+  --site-width: 73.75rem;
+
+  --step-minus-2: clamp(0.6944rem, 0.6849rem + 0.003vw, 0.72rem);
+  --step-minus-1: clamp(0.8333rem, 0.8085rem + 0.0078vw, 0.9rem);
+  --step-0: clamp(1rem, 0.9535rem + 0.0145vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1233rem + 0.024vw, 1.4063rem);
+  --step-2: clamp(1.44rem, 1.3217rem + 0.037vw, 1.7578rem);
+  --step-3: clamp(1.728rem, 1.5534rem + 0.0546vw, 2.1973rem);
+  --step-4: clamp(2.0736rem, 1.8232rem + 0.0783vw, 2.7466rem);
+  --step-5: clamp(2.4883rem, 2.1367rem + 0.1099vw, 3.4332rem);
+  --step-hero: clamp(2.75rem, 2.0058rem + 0.2326vw, 4.75rem);
+  --step-page: clamp(2.4375rem, 2.0422rem + 0.1235vw, 3.5rem);
+  --step-section: clamp(1.875rem, 1.6424rem + 0.0727vw, 2.5rem);
+
+  --space-3xs: clamp(0.25rem, 0.2267rem + 0.0073vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4535rem + 0.0145vw, 0.625rem);
+  --space-xs: clamp(0.75rem, 0.6802rem + 0.0218vw, 0.9375rem);
+  --space-s: clamp(1rem, 0.907rem + 0.0291vw, 1.25rem);
+  --space-m: clamp(1.5rem, 1.3605rem + 0.0436vw, 1.875rem);
+  --space-l: clamp(2rem, 1.814rem + 0.0581vw, 2.5rem);
+  --space-xl: clamp(3rem, 2.7209rem + 0.0872vw, 3.75rem);
+  --space-2xl: clamp(4rem, 3.6279rem + 0.1163vw, 5rem);
+  --space-3xl: clamp(6rem, 5.4419rem + 0.1744vw, 7.5rem);
+  --space-gutter: clamp(1rem, 0.814rem + 0.0581vw, 1.5rem);
+  --space-section: clamp(3.25rem, 2.6453rem + 0.189vw, 4.875rem);
+  --space-hero-top: clamp(3.25rem, 2.6686rem + 0.1817vw, 4.8125rem);
+  --space-hero-bottom: clamp(1.875rem, 1.6424rem + 0.0727vw, 2.5rem);
+  --space-page-top: clamp(2.8125rem, 2.3474rem + 0.1453vw, 4.0625rem);
+  --space-page-bottom: clamp(2.5rem, 2.1512rem + 0.109vw, 3.4375rem);
+  --space-header: clamp(4.6875rem, 4.4084rem + 0.0872vw, 5.4375rem);
+}

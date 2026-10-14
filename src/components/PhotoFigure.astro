@@ -1,0 +1,24 @@
+---
+import SanityImage from './SanityImage.astro'
+import type { Figure } from '../lib/types'
+
+interface Props {
+  figure: Figure
+  sizes?: string
+  class?: string
+  priority?: boolean
+}
+
+const { figure, sizes = '(min-width: 1180px) 36rem, (min-width: 700px) calc((100vw - 5rem) / 2), calc(100vw - 2.2rem)', class: className, priority = false } = Astro.props
+---
+
+<figure>
+  <SanityImage
+    image={figure}
+    class={className}
+    sizes={sizes}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : 'auto'}
+  />
+  {figure.caption && <figcaption>{figure.caption}</figcaption>}
+</figure>

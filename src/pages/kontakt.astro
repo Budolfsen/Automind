@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../components/BaseLayout.astro'
+import PageIntro from '../components/PageIntro.astro'
+import SanityImage from '../components/SanityImage.astro'
+import SocialLinks from '../components/SocialLinks.astro'
+import TopicRow from '../components/TopicRow.astro'
+import { getPage, getSettings } from '../lib/content'
+
+const page = await getPage('kontakt')
+const settings = await getSettings()
+---
+
+<BaseLayout title={page.seoTitle} description={page.seoDescription} image={page.ogImage ?? page.heroImage}>
+  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={page.intro} />
+  <section class="site-width page-bottom support-grid">
+    <div>
+      <p class="eyebrow">Hvad handler det om?</p>
+      {page.topics.map((topic) => <TopicRow topic={topic} />)}
+      <div class="notice">
+        {page.contactName && <p class="contact-name">{page.contactName}</p>}
+        <a class="text-link" href={`mailto:${settings.email}`}>{settings.email}</a>
+      </div>
+      <SocialLinks links={settings.socialLinks} />
+    </div>
+    {page.heroImage && (
+      <SanityImage
+        image={page.heroImage}
+        class="wide-photo"
+        sizes="(min-width: 900px) 40vw, calc(100vw - 2.2rem)"
+        loading="eager"
+        fetchpriority="high"
+      />
+    )}
+  </section>
+</BaseLayout>

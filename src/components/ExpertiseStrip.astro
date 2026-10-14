@@ -1,0 +1,15 @@
+---
+interface Props {
+  items: string[]
+}
+
+const { items } = Astro.props
+---
+
+{items.length > 0 && (
+  <div class="expertise-strip">
+    {items.map((item, index) => (
+      <span>{index === 0 && <i class="status-dot" />}{item}</span>
+    ))}
+  </div>
+)}

@@ -1,0 +1,19 @@
+---
+interface Props {
+  href: string
+  variant?: 'primary' | 'technical' | 'frost' | 'ghost'
+  size?: 'md' | 'lg'
+  class?: string
+  download?: string | boolean
+}
+
+const { href, variant = 'primary', size = 'md', class: className, download } = Astro.props
+---
+
+<a
+  class:list={['button', `button--${variant}`, size === 'lg' && 'button--lg', className]}
+  href={href}
+  download={download}
+>
+  <slot />
+</a>

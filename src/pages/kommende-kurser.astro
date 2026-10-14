@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../components/BaseLayout.astro'
+import Button from '../components/Button.astro'
+import PageIntro from '../components/PageIntro.astro'
+import SanityImage from '../components/SanityImage.astro'
+import { attachmentPreview, imageFileSize } from '../lib/attachment'
+import { invitationVariant } from '../lib/invitationPreview'
+import { getPage, getSettings, getUpcomingCourses } from '../lib/content'
+import { courseNodes } from '../lib/seo'
+
+const page = await getPage('kommende-kurser')
+const settings = await getSettings()
+const courses = await Promise.all(
+  (await getUpcomingCourses()).map(async (course) => {
+    const attachment = course.attachment
+    if (!attachment?.url || attachmentPreview(attachment) !== 'image') return course
+    const preview = await invitationVariant(attachment.url, 512)
+    if (preview) {
+      return {
+        ...course,
+        attachment: {
+          ...attachment,
+          width: preview.width,
+          height: preview.height,
+          previewSrc: `/forhaandsvisning/${course._id}/512`,
+          previewSrcSet: `/forhaandsvisning/${course._id}/288 288w, /forhaandsvisning/${course._id}/512 512w`,
+        },
+      }
+    }
+    const size = await imageFileSize(attachment.url)
+    if (!size) return course
+    return { ...course, attachment: { ...attachment, width: size.width, height: size.height } }
+  }),
+)
+const lead = courses[0]
+
+function downloadHref(url: string, filename: string | null) {
+  return `${url}?dl=${encodeURIComponent(filename ?? 'invitation')}`
+}
+---
+
+<BaseLayout
+  title={page.seoTitle}
+  description={page.seoDescription}
+  image={lead?.image ?? page.ogImage}
+  jsonLd={courseNodes(courses, settings.companyName)}
+>
+  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={page.intro} />
+  {courses.map((course) => (
+    <section class="site-width page-bottom support-grid">
+      <div>
+        <p class="eyebrow">{course.eyebrow}</p>
+        <h2 class="section-heading">{course.title}</h2>
+        {course.paragraphs.map((paragraph) => <p class="body-copy">{paragraph}</p>)}
+        <div class="hero-actions">
+          {course.contacts.map((contact) => (
+            <Button
+              href={`mailto:${contact.email}?subject=${encodeURIComponent(course.title)}`}
+              variant={contact === course.contacts[0] ? 'frost' : 'technical'}
+            >
+              Skriv til {contact.name.split(' ')[0]}
+            </Button>
+          ))}
+        </div>
+      </div>
+      {course.image && (
+        <SanityImage
+          image={course.image}
+          class="wide-photo"
+          sizes="(min-width: 900px) 40vw, calc(100vw - 2.2rem)"
+          loading="eager"
+          fetchpriority="high"
+        />
+      )}
+      {course.attachment?.url && (
+        <figure class="invitation">
+          <Button
+            href={downloadHref(course.attachment.url, course.attachment.filename)}
+            variant="primary"
+            size="lg"
+            download={course.attachment.filename ?? true}
+          >
+            {course.attachment.label || 'Download invitation'}
+          </Button>
+          {attachmentPreview(course.attachment) === 'image' && (
+            <a href={`/invitation/${course._id}`} target="_blank" rel="noopener noreferrer">
+              <img
+                class="invitation-preview"
+                src={course.attachment.previewSrc ?? course.attachment.url}
+                srcset={course.attachment.previewSrcSet}
+                sizes="18rem"
+                alt={course.attachment.label || `Invitation til ${course.title}`}
+                width={course.attachment.width}
+                height={course.attachment.height}
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          )}
+          {attachmentPreview(course.attachment) === 'pdf' && (
+            <iframe
+              class="invitation-frame"
+              src={course.attachment.url}
+              title={course.attachment.label || `Invitation til ${course.title}`}
+            />
+          )}
+        </figure>
+      )}
+    </section>
+  ))}
+</BaseLayout>

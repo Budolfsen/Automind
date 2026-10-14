@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../components/BaseLayout.astro'
+import Button from '../components/Button.astro'
+import CourseGrid from '../components/CourseGrid.astro'
+import DiagnosticPanel from '../components/DiagnosticPanel.astro'
+import Hero from '../components/Hero.astro'
+import SectionHeading from '../components/SectionHeading.astro'
+import SupportList from '../components/SupportList.astro'
+import TextLines from '../components/TextLines.astro'
+import { getCourses, getPage, getSettings } from '../lib/content'
+
+const page = await getPage('forside')
+const courses = await getCourses()
+const settings = await getSettings()
+const coursesSection = page.sections[0]
+const supportSection = page.sections[1]
+---
+
+<BaseLayout
+  title={page.seoTitle}
+  description={page.seoDescription}
+  image={page.ogImage ?? page.heroImage}
+  lcpImage={page.heroImage}
+>
+  {page.heroImage && (
+    <Hero
+      image={page.heroImage}
+      eyebrow={page.eyebrow}
+      brand={page.showBrand ? settings.companyName.toUpperCase() : undefined}
+      title={page.heading}
+      copy={page.intro}
+      actions={page.actions}
+      expertise={page.expertise}
+    />
+  )}
+
+  {coursesSection?.heading && (
+    <section class="section-band">
+      <div class="site-width section-space">
+        <SectionHeading
+          eyebrow={coursesSection.eyebrow}
+          heading={coursesSection.heading}
+          href={coursesSection.ctaHref}
+          linkLabel={coursesSection.ctaLabel}
+        />
+        <CourseGrid courses={courses} />
+      </div>
+    </section>
+  )}
+
+  {supportSection?.heading && (
+    <section class="site-width section-space support-grid">
+      <div>
+        {supportSection.eyebrow && <p class="eyebrow">{supportSection.eyebrow}</p>}
+        <h2 class="section-heading"><TextLines text={supportSection.heading} /></h2>
+        {supportSection.body && <p class="body-copy">{supportSection.body}</p>}
+        <SupportList items={supportSection.items ?? []} />
+        {supportSection.ctaHref && supportSection.ctaLabel && (
+          <div class="section-actions">
+            <Button href={supportSection.ctaHref} variant="frost">
+              {supportSection.ctaLabel} <span aria-hidden="true">→</span>
+            </Button>
+          </div>
+        )}
+      </div>
+      <DiagnosticPanel />
+    </section>
+  )}
+</BaseLayout>
