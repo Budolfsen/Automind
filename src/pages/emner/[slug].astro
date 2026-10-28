@@ -3,7 +3,7 @@ import BaseLayout from '../../components/BaseLayout.astro'
 import PageIntro from '../../components/PageIntro.astro'
 import SanityImage from '../../components/SanityImage.astro'
 import { getSeoText, getSeoTexts } from '../../lib/content'
-import { proseParagraphs } from '../../lib/seo'
+import { proseParagraphs, topicNodes } from '../../lib/seo'
 
 export async function getStaticPaths() {
   const texts = await getSeoTexts()
@@ -14,9 +14,15 @@ const slug = Astro.params.slug
 if (!slug) throw new Error('SEO-tekst mangler adresse')
 const text = await getSeoText(slug)
 const [lead, ...rest] = proseParagraphs(text.intro)
+const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
 ---
 
-<BaseLayout title={`${text.title} — AutoMind · Hjørring`} description={lead ?? text.title} image={text.image}>
+<BaseLayout
+  title={`${text.title} — AutoMind · Hjørring`}
+  description={lead ?? text.title}
+  image={text.image}
+  jsonLd={topicNodes(text, siteUrl)}
+>
   <PageIntro eyebrow="AutoMind · Hjørring" title={text.title} description={lead ?? ''} />
   <article class="site-width page-bottom topic-list">
     {text.image?.asset && (

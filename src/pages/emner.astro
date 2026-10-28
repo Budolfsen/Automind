@@ -1,23 +1,36 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro'
 import PageIntro from '../components/PageIntro.astro'
-import { getSeoTexts } from '../lib/content'
-import { seoTextList } from '../lib/seo'
+import { getSeoTexts, getSettings } from '../lib/content'
+import { faqEntries, faqPage, seoTextList } from '../lib/seo'
 
 const texts = await getSeoTexts()
+const settings = await getSettings()
 const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
+const faq = faqEntries(settings)
 ---
 
 <BaseLayout
   title="Elbilkurser og teknisk support — AutoMind · Hjørring"
   description="AutoMind i Hjørring holder elbilkurser for mekanikere og giver værksteder teknisk support til fejlfinding, højvolt, BMS og diagnostik."
-  jsonLd={texts.length > 0 ? seoTextList(texts, siteUrl) : undefined}
+  jsonLd={[...(texts.length > 0 ? [seoTextList(texts, siteUrl)] : []), faqPage(settings)]}
 >
   <PageIntro
     eyebrow="AutoMind · Hjørring"
     title="Elbilkurser og teknisk support"
     description="AutoMind holder elbilkurser for mekanikere og værksteder og giver teknisk support til fejlfinding på elbiler."
   />
+  <section class="site-width faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Spørgsmål og svar</h2>
+    <dl class="faq-list">
+      {faq.map((entry) => (
+        <div>
+          <dt>{entry.question}</dt>
+          <dd>{entry.answer}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
   <nav class="site-width page-bottom" aria-label="Faglige emner">
     <ul class="topic-index">
       {texts.map((text) => (

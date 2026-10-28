@@ -1,0 +1,27 @@
+{
+  "name": "Automind",
+  "short_name": "Automind",
+  "lang": "da",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-mask.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "theme_color": "#12141c",
+  "background_color": "#12141c",
+  "display": "browser",
+  "start_url": "/"
+}

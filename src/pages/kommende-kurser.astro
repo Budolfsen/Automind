@@ -43,7 +43,7 @@ function downloadHref(url: string, filename: string | null) {
   title={page.seoTitle}
   description={page.seoDescription}
   image={lead?.image ?? page.ogImage}
-  jsonLd={courseNodes(courses, settings.companyName, Astro.site?.href ?? 'https://automind.dk/')}
+  jsonLd={courseNodes(courses, settings, Astro.site?.href ?? 'https://automind.dk/')}
 >
   <PageIntro eyebrow={page.eyebrow} title={page.heading} description={page.intro} />
   {courses.map((course) => (

@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro'
-import { getSeoTexts } from '../lib/content'
-import { proseParagraphs } from '../lib/seo'
+import { getSeoTexts, getSettings } from '../lib/content'
+import { companySummary, faqEntries, proseParagraphs } from '../lib/seo'
 
 const pages = [
   ['Forside', 'https://automind.dk/'],
@@ -14,11 +14,15 @@ const pages = [
 
 export const GET: APIRoute = async () => {
   const texts = await getSeoTexts()
+  const settings = await getSettings()
   const lines = [
     '# AutoMind',
     '',
-    'AutoMind i Hjørring holder elbilkurser for mekanikere og værksteder og giver teknisk support til fejlfinding på elbiler.',
+    companySummary(settings),
     '',
+    '## Spørgsmål og svar',
+    '',
+    ...faqEntries(settings).flatMap((entry) => [`### ${entry.question}`, '', entry.answer, '']),
     '## Sider',
     '',
     ...pages.map(([label, url]) => `- ${label}: ${url}`),

@@ -1,0 +1,146 @@
+---
+const measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID
+const gaId = /^G-[A-Z0-9]+$/.test(measurementId ?? '') ? measurementId : ''
+---
+
+{
+  gaId && (
+    <>
+      <script is:inline define:vars={{ gaId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        function pageFields() {
+          var path = location.pathname.replace(/\/+$/, '') || '/';
+          return {
+            page_path: path,
+            page_title: document.title,
+            page_location: location.origin + path + location.search,
+          };
+        }
+        window.automindPage = pageFields;
+        var analyticsGranted = false;
+        try {
+          analyticsGranted = localStorage.getItem('automind-consent') === 'granted';
+        } catch {
+          /* privat tilstand uden lager */
+        }
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: analyticsGranted ? 'granted' : 'denied',
+          wait_for_update: analyticsGranted ? 0 : 500,
+        });
+        gtag('js', new Date());
+        var fields = pageFields();
+        if (!analyticsGranted) fields.send_page_view = false;
+        gtag('config', gaId, fields);
+      </script>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+      <div class="consent" id="samtykke" role="dialog" aria-labelledby="samtykke-titel">
+        <p id="samtykke-titel">Vi bruger statistikcookies til at forstå, hvordan sitet bliver brugt.</p>
+        <div class="consent-actions">
+          <button type="button" class="button button--technical" id="samtykke-afvis">Afvis</button>
+          <button type="button" class="button button--primary" id="samtykke-accepter">Acceptér</button>
+        </div>
+      </div>
+      <script is:inline>
+        var banner = document.getElementById('samtykke');
+        var accept = document.getElementById('samtykke-accepter');
+        var decline = document.getElementById('samtykke-afvis');
+        var key = 'automind-consent';
+        function stored() {
+          try {
+            return localStorage.getItem(key);
+          } catch {
+            return 'denied';
+          }
+        }
+        function choose(value) {
+          try {
+            localStorage.setItem(key, value);
+          } catch {
+            /* valget gælder kun dette besøg */
+          }
+          if (window.gtag) {
+            window.gtag('consent', 'update', {
+              analytics_storage: value === 'granted' ? 'granted' : 'denied',
+            });
+            if (value === 'granted' && window.automindPage) {
+              window.gtag('event', 'page_view', window.automindPage());
+            }
+          }
+          if (banner) banner.hidden = true;
+        }
+        document.addEventListener('click', function (event) {
+          if (stored() !== 'granted' || !window.gtag) return;
+          var target = event.target instanceof Element ? event.target.closest('a, button') : null;
+          if (!target || target.closest('#samtykke')) return;
+          var href = target.href || target.getAttribute('href') || '';
+          var text = (target.innerText || target.getAttribute('aria-label') || '')
+            .trim()
+            .replace(/\s+/g, ' ')
+            .slice(0, 100);
+          window.gtag('event', 'click', { link_url: href, link_text: text });
+        });
+        if (banner && stored()) banner.hidden = true;
+        accept?.addEventListener('click', function () {
+          choose('granted');
+        });
+        decline?.addEventListener('click', function () {
+          choose('denied');
+        });
+      </script>
+    </>
+  )
+}
+
+<style>
+  :global(body:has(#samtykke:not([hidden]))) {
+    padding-bottom: 8.5rem;
+  }
+
+  @media (max-width: 48rem) {
+    :global(body:has(#samtykke:not([hidden]))) {
+      padding-bottom: 12rem;
+    }
+  }
+
+  .consent {
+    position: fixed;
+    z-index: 60;
+    inset-inline: var(--space-gutter);
+    bottom: var(--space-s);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    width: min(46rem, calc(100% - 2 * var(--space-gutter)));
+    margin-inline: auto;
+    padding: var(--space-s);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-card);
+    background: color-mix(in oklch, var(--color-bg) 92%, transparent);
+    box-shadow: 0 12px 40px oklch(0 0 0 / 0.35);
+  }
+
+  .consent[hidden] {
+    display: none;
+  }
+
+  .consent p {
+    margin: 0;
+    flex: 1 1 16rem;
+    color: var(--color-text);
+    font-size: var(--step-minus-1);
+  }
+
+  .consent-actions {
+    display: flex;
+    gap: var(--space-2xs);
+  }
+</style>

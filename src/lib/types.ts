@@ -112,6 +112,7 @@ export type SeoText = {
   linkLabel: string
   linkHref: string
   order: number
+  updatedAt: string | null
 }
 
 export type Course = {

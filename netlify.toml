@@ -5,6 +5,9 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[context.production.environment]
+  PUBLIC_GA_MEASUREMENT_ID = "G-S48GG2GV8H"
+
 [[headers]]
   for = "/_astro/*"
   [headers.values]

@@ -58,7 +58,8 @@ const seoTextFields = `{
   sections[]{ heading, text },
   linkLabel,
   linkHref,
-  order
+  order,
+  "updatedAt": _updatedAt
 }`
 
 export const SEO_TEXTS_QUERY = `*[_type == "seoText"] | order(order asc)${seoTextFields}`
