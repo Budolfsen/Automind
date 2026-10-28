@@ -1,4 +1,5 @@
 ---
+import AeoArticle from '../components/AeoArticle.astro'
 import BaseLayout from '../components/BaseLayout.astro'
 import Button from '../components/Button.astro'
 import DiagnosticPanel from '../components/DiagnosticPanel.astro'
@@ -6,15 +7,23 @@ import PageIntro from '../components/PageIntro.astro'
 import PhotoGrid from '../components/PhotoGrid.astro'
 import SupportList from '../components/SupportList.astro'
 import TextLines from '../components/TextLines.astro'
+import { supportPage } from '../lib/aeoArticles'
 import { getPage } from '../lib/content'
+import { articleNodes } from '../lib/seo'
 
 const page = await getPage('teknisk-support')
 const section = page.sections[0]
+const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
 ---
 
-<BaseLayout title={page.seoTitle} description={page.seoDescription} image={page.ogImage ?? page.gallery[0]}>
-  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={page.intro} />
-  <section class="site-width page-bottom">
+<BaseLayout
+  title={supportPage.title}
+  description={supportPage.description}
+  image={page.ogImage ?? page.gallery[0]}
+  jsonLd={articleNodes(supportPage, siteUrl)}
+>
+  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={supportPage.intro} />
+  <section class="site-width">
     {section?.heading && (
       <div class="support-grid">
         <div>
@@ -32,4 +41,5 @@ const section = page.sections[0]
     )}
     <PhotoGrid figures={page.gallery} priorityFirst />
   </section>
+  <AeoArticle article={supportPage} />
 </BaseLayout>

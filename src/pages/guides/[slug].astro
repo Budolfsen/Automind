@@ -1,0 +1,31 @@
+---
+import AeoArticle from '../../components/AeoArticle.astro'
+import BaseLayout from '../../components/BaseLayout.astro'
+import PageIntro from '../../components/PageIntro.astro'
+import { guides } from '../../lib/aeoArticles'
+import { articleNodes } from '../../lib/seo'
+import type { AeoArticle as Article } from '../../lib/seo'
+
+export function getStaticPaths() {
+  return guides.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }))
+}
+
+interface Props {
+  article: Article
+}
+
+const { article } = Astro.props
+const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
+---
+
+<BaseLayout
+  title={article.title}
+  description={article.description}
+  jsonLd={articleNodes(article, siteUrl)}
+>
+  <PageIntro eyebrow="AutoMind Hjørring" title={article.title} description={article.intro} />
+  <AeoArticle article={article} />
+</BaseLayout>

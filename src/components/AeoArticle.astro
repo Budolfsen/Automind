@@ -1,0 +1,52 @@
+---
+import type { AeoArticle } from '../lib/seo'
+
+interface Props {
+  article: AeoArticle
+}
+
+const { article } = Astro.props
+const faqId = `faq-${article.kind}-${article.slug}`
+---
+
+<article class="site-width page-bottom topic-list aeo-article">
+  {article.sections.map((section) => (
+    <section>
+      <h2>{section.question}</h2>
+      <p class="body-copy">{section.answer}</p>
+      {section.paragraphs?.map((paragraph) => <p class="body-copy">{paragraph}</p>)}
+      {section.list && section.list.length > 0 && (
+        <ul class="support-list">
+          {section.list.map((item) => <li>{item}</li>)}
+        </ul>
+      )}
+    </section>
+  ))}
+  <blockquote class="aeo-quote">
+    <p>{article.quote.text}</p>
+    <footer>
+      <cite>{article.quote.name}</cite>, {article.quote.role}
+    </footer>
+  </blockquote>
+  <section class="faq" aria-labelledby={faqId}>
+    <h2 id={faqId}>Spørgsmål og svar</h2>
+    <dl class="faq-list">
+      {article.faq.map((entry) => (
+        <div>
+          <dt>{entry.question}</dt>
+          <dd>{entry.answer}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+  {article.links && article.links.length > 0 && (
+    <nav aria-label="Læs også">
+      <h2>Læs også</h2>
+      <ul class="topic-index">
+        {article.links.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  )}
+</article>

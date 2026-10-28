@@ -1,9 +1,11 @@
 ---
+import AeoArticle from '../../components/AeoArticle.astro'
 import BaseLayout from '../../components/BaseLayout.astro'
 import PageIntro from '../../components/PageIntro.astro'
 import SanityImage from '../../components/SanityImage.astro'
+import { topicArticles } from '../../lib/aeoArticles'
 import { getSeoText, getSeoTexts } from '../../lib/content'
-import { proseParagraphs, topicNodes } from '../../lib/seo'
+import { articleNodes, proseParagraphs, topicNodes } from '../../lib/seo'
 
 export async function getStaticPaths() {
   const texts = await getSeoTexts()
@@ -13,18 +15,20 @@ export async function getStaticPaths() {
 const slug = Astro.params.slug
 if (!slug) throw new Error('SEO-tekst mangler adresse')
 const text = await getSeoText(slug)
+const extra = topicArticles[slug]
 const [lead, ...rest] = proseParagraphs(text.intro)
 const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
+const jsonLd = extra ? [...topicNodes(text, siteUrl), ...articleNodes(extra, siteUrl)] : topicNodes(text, siteUrl)
 ---
 
 <BaseLayout
-  title={`${text.title} — AutoMind · Hjørring`}
-  description={lead ?? text.title}
+  title={extra?.title ?? text.title}
+  description={extra?.description ?? lead ?? text.title}
   image={text.image}
-  jsonLd={topicNodes(text, siteUrl)}
+  jsonLd={jsonLd}
 >
-  <PageIntro eyebrow="AutoMind · Hjørring" title={text.title} description={lead ?? ''} />
-  <article class="site-width page-bottom topic-list">
+  <PageIntro eyebrow="AutoMind Hjørring" title={extra?.title ?? text.title} description={extra?.intro ?? lead ?? ''} />
+  <article class:list={['site-width', 'topic-list', !extra && 'page-bottom']}>
     {text.image?.asset && (
       <SanityImage
         image={text.image}
@@ -44,4 +48,5 @@ const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
     <p class="body-copy"><a href={text.linkHref}>{text.linkLabel}</a></p>
     <p class="body-copy"><a href="/emner/">Alle faglige emner</a></p>
   </article>
+  {extra && <AeoArticle article={extra} />}
 </BaseLayout>

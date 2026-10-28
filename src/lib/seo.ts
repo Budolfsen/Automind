@@ -1,5 +1,8 @@
 import type { SeoText, SiteSettings, UpcomingCourse } from './types'
 
+export const brandName = 'AutoMind Hjørring'
+export const brandSlogan = 'Elbilkurser & support'
+
 const expertise = [
   'Elbilkurser',
   'Højvoltssikkerhed',
@@ -7,6 +10,15 @@ const expertise = [
   'Diagnostik',
   'Teknisk support til værksteder',
 ]
+
+export function brandedTitle(title: string) {
+  const stripped = title
+    .replace(/\s*[—–-]\s*AutoMind\s*[·•]\s*Hjørring\s*$/u, '')
+    .replace(/\s*[—–-]\s*AutoMind Hjørring\s*$/u, '')
+    .trim()
+  if (stripped === brandName || stripped.endsWith(brandName)) return stripped
+  return `${stripped} – ${brandName}`
+}
 
 export function organizationId(siteUrl: string) {
   return new URL('#organization', siteUrl).href
@@ -20,7 +32,9 @@ export function organizationNode(settings: SiteSettings, siteUrl: string) {
   return {
     '@type': ['EducationalOrganization', 'LocalBusiness'],
     '@id': organizationId(siteUrl),
-    name: settings.companyName,
+    name: brandName,
+    alternateName: settings.companyName,
+    slogan: brandSlogan,
     description: companySummary(settings),
     email: settings.email,
     url: siteUrl,
@@ -51,7 +65,7 @@ export function courseNodes(courses: UpcomingCourse[], settings: SiteSettings, s
     provider: {
       '@id': organizationId(siteUrl),
       '@type': 'EducationalOrganization',
-      name: settings.companyName,
+      name: brandName,
       url: siteUrl,
     },
     hasCourseInstance: {
@@ -59,7 +73,7 @@ export function courseNodes(courses: UpcomingCourse[], settings: SiteSettings, s
       courseMode: 'fremmøde',
       location: {
         '@type': 'Place',
-        name: `${settings.companyName}, ${settings.locationLine}`,
+        name: brandName,
         address: {
           '@type': 'PostalAddress',
           addressLocality: settings.locationLine,
@@ -115,6 +129,109 @@ export type FaqEntry = {
   answer: string
 }
 
+export type AeoLink = {
+  href: string
+  label: string
+}
+
+export type AeoQuote = {
+  text: string
+  name: string
+  role: string
+}
+
+export type AeoSection = {
+  question: string
+  answer: string
+  paragraphs?: string[]
+  list?: string[]
+}
+
+export type AeoArticle = {
+  slug: string
+  path: string
+  title: string
+  description: string
+  intro: string
+  kind: 'contact' | 'service' | 'topic' | 'guide'
+  sections: AeoSection[]
+  quote: AeoQuote
+  faq: FaqEntry[]
+  links?: AeoLink[]
+}
+
+export function faqNode(entries: FaqEntry[]) {
+  return {
+    '@type': 'FAQPage',
+    mainEntity: entries.map((entry) => ({
+      '@type': 'Question',
+      name: entry.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: entry.answer,
+      },
+    })),
+  }
+}
+
+export function articleNodes(article: AeoArticle, siteUrl: string) {
+  const url = absolute(article.path, siteUrl)
+  const nodes: Record<string, unknown>[] = []
+  if (article.kind === 'contact') {
+    nodes.push({
+      '@type': 'ContactPage',
+      name: brandedTitle(article.title),
+      description: article.description,
+      url,
+      inLanguage: 'da',
+      mainEntity: { '@id': organizationId(siteUrl) },
+    })
+  }
+  if (article.kind === 'service') {
+    nodes.push({
+      '@type': 'Service',
+      name: article.title,
+      serviceType: 'Teknisk support til fejlfinding på elbiler',
+      description: article.description,
+      url,
+      provider: { '@id': organizationId(siteUrl) },
+      areaServed: { '@type': 'Country', name: 'Danmark' },
+    })
+  }
+  if (article.kind === 'guide') {
+    nodes.push({
+      '@type': 'TechArticle',
+      headline: article.title,
+      description: article.description,
+      inLanguage: 'da',
+      url,
+      author: { '@id': organizationId(siteUrl) },
+      publisher: { '@id': organizationId(siteUrl) },
+      mainEntityOfPage: url,
+    })
+    nodes.push(breadcrumb([
+      ['Forside', siteUrl],
+      [article.title, url],
+    ]))
+  }
+  nodes.push({
+    '@type': 'Quotation',
+    text: article.quote.text,
+    creator: {
+      '@type': 'Person',
+      name: article.quote.name,
+      jobTitle: article.quote.role,
+      worksFor: { '@id': organizationId(siteUrl) },
+    },
+  })
+  nodes.push(faqNode(article.faq))
+  return nodes
+}
+
+export function faqPage(settings: SiteSettings) {
+  return faqNode(faqEntries(settings))
+}
+
 export function faqEntries(settings: SiteSettings): FaqEntry[] {
   return [
     {
@@ -136,22 +253,12 @@ export function faqEntries(settings: SiteSettings): FaqEntry[] {
   ]
 }
 
-export function faqPage(settings: SiteSettings) {
-  return {
-    '@type': 'FAQPage',
-    mainEntity: faqEntries(settings).map((entry) => ({
-      '@type': 'Question',
-      name: entry.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: entry.answer,
-      },
-    })),
-  }
+function topicUrl(slug: string, siteUrl: string) {
+  return absolute(`emner/${slug}/`, siteUrl)
 }
 
-function topicUrl(slug: string, siteUrl: string) {
-  return new URL(`emner/${slug}/`, siteUrl).href
+function absolute(path: string, siteUrl: string) {
+  return new URL(path.replace(/^\//, ''), siteUrl).href
 }
 
 function breadcrumb(items: [string, string][]) {

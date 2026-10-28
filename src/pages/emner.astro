@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro'
 import PageIntro from '../components/PageIntro.astro'
+import { guides } from '../lib/aeoArticles'
 import { getSeoTexts, getSettings } from '../lib/content'
 import { faqEntries, faqPage, seoTextList } from '../lib/seo'
 
@@ -16,7 +17,7 @@ const faq = faqEntries(settings)
   jsonLd={[...(texts.length > 0 ? [seoTextList(texts, siteUrl)] : []), faqPage(settings)]}
 >
   <PageIntro
-    eyebrow="AutoMind · Hjørring"
+    eyebrow="AutoMind Hjørring"
     title="Elbilkurser og teknisk support"
     description="AutoMind holder elbilkurser for mekanikere og værksteder og giver teknisk support til fejlfinding på elbiler."
   />
@@ -31,10 +32,18 @@ const faq = faqEntries(settings)
       ))}
     </dl>
   </section>
-  <nav class="site-width page-bottom" aria-label="Faglige emner">
+  <nav class="site-width" aria-label="Faglige emner">
     <ul class="topic-index">
       {texts.map((text) => (
         <li><a href={`/emner/${text.slug}/`}>{text.title}</a></li>
+      ))}
+    </ul>
+  </nav>
+  <nav class="site-width page-bottom guide-index" aria-label="Guides">
+    <h2 class="section-heading">Guides</h2>
+    <ul class="topic-index">
+      {guides.map((guide) => (
+        <li><a href={guide.path}>{guide.title}</a></li>
       ))}
     </ul>
   </nav>

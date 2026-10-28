@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro'
+import { articleLines, guides, kontaktPage, kontaktTopic, picoscopeTopic, supportPage } from '../lib/aeoArticles'
 import { getSeoTexts, getSettings } from '../lib/content'
 import { companySummary, faqEntries, proseParagraphs } from '../lib/seo'
 
@@ -16,7 +17,7 @@ export const GET: APIRoute = async () => {
   const texts = await getSeoTexts()
   const settings = await getSettings()
   const lines = [
-    '# AutoMind',
+    '# AutoMind Hjørring',
     '',
     companySummary(settings),
     '',
@@ -26,7 +27,11 @@ export const GET: APIRoute = async () => {
     '## Sider',
     '',
     ...pages.map(([label, url]) => `- ${label}: ${url}`),
+    ...guides.map((guide) => `- ${guide.title}: https://automind.dk${guide.path}`),
     '',
+    '## Uddybning',
+    '',
+    ...[kontaktPage, supportPage, kontaktTopic, picoscopeTopic, ...guides].flatMap((article) => articleLines(article)),
     '## Emner',
     '',
     ...texts.flatMap((text) => [

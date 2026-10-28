@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro'
 import SocialLinks from './SocialLinks.astro'
+import { guides } from '../lib/aeoArticles'
 import type { SiteSettings } from '../lib/types'
 
 interface Props {
@@ -26,6 +27,9 @@ const { settings } = Astro.props
       ))}
       <a href="/kontakt">{settings.contactLabel}</a>
       <a href="/emner">Faglige emner</a>
+      {guides.map((guide) => (
+        <a href={guide.path}>{guide.title}</a>
+      ))}
     </nav>
   </div>
 </footer>

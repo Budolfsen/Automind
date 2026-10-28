@@ -1,18 +1,27 @@
 ---
 import BaseLayout from '../components/BaseLayout.astro'
+import AeoArticle from '../components/AeoArticle.astro'
 import PageIntro from '../components/PageIntro.astro'
 import SanityImage from '../components/SanityImage.astro'
 import SocialLinks from '../components/SocialLinks.astro'
 import TopicRow from '../components/TopicRow.astro'
+import { kontaktPage } from '../lib/aeoArticles'
 import { getPage, getSettings } from '../lib/content'
+import { articleNodes } from '../lib/seo'
 
 const page = await getPage('kontakt')
 const settings = await getSettings()
+const siteUrl = Astro.site?.href ?? 'https://automind.dk/'
 ---
 
-<BaseLayout title={page.seoTitle} description={page.seoDescription} image={page.ogImage ?? page.heroImage}>
-  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={page.intro} />
-  <section class="site-width page-bottom support-grid">
+<BaseLayout
+  title={kontaktPage.title}
+  description={kontaktPage.description}
+  image={page.ogImage ?? page.heroImage}
+  jsonLd={articleNodes(kontaktPage, siteUrl)}
+>
+  <PageIntro eyebrow={page.eyebrow} title={page.heading} description={kontaktPage.intro} />
+  <section class="site-width support-grid">
     <div>
       <p class="eyebrow">Hvad handler det om?</p>
       {page.topics.map((topic) => <TopicRow topic={topic} />)}
@@ -32,4 +41,5 @@ const settings = await getSettings()
       />
     )}
   </section>
+  <AeoArticle article={kontaktPage} />
 </BaseLayout>
