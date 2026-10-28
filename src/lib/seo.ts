@@ -138,6 +138,10 @@ export type AeoQuote = {
   text: string
   name: string
   role: string
+  source?: {
+    label: string
+    href?: string
+  }
 }
 
 export type AeoSection = {
@@ -217,6 +221,7 @@ export function articleNodes(article: AeoArticle, siteUrl: string) {
   nodes.push({
     '@type': 'Quotation',
     text: article.quote.text,
+    ...(article.quote.source ? { citation: article.quote.source.label } : {}),
     creator: {
       '@type': 'Person',
       name: article.quote.name,

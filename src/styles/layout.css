@@ -600,6 +600,16 @@ details[open] .when-open {
   color: var(--color-text);
 }
 
+.aeo-source {
+  display: block;
+  margin-top: var(--space-2xs);
+}
+
+.aeo-source a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .topic-index {
   display: grid;
   gap: var(--space-s);

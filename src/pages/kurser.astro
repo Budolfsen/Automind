@@ -5,6 +5,7 @@ import Notice from '../components/Notice.astro'
 import PageIntro from '../components/PageIntro.astro'
 import PhotoGrid from '../components/PhotoGrid.astro'
 import SanityImage from '../components/SanityImage.astro'
+import { brandGuides } from '../lib/aeoArticles'
 import { getCourses, getPage } from '../lib/content'
 
 const page = await getPage('kurser')
@@ -26,5 +27,13 @@ const courses = await getCourses()
     <CourseGrid courses={courses} mode="details" prompt={page.promptCard} level={2} />
     {page.notice && <Notice text={page.notice} />}
     <PhotoGrid figures={page.gallery} />
+    <nav class="guide-index" aria-label="Mærkekurser">
+      <h2 class="section-heading">Mærkekurser</h2>
+      <ul class="topic-index">
+        {brandGuides.map((guide) => (
+          <li><a href={guide.path}>{guide.title}</a></li>
+        ))}
+      </ul>
+    </nav>
   </section>
 </BaseLayout>

@@ -450,7 +450,223 @@ const ladningGuide: AeoArticle = {
   ],
 }
 
-export const guides = [fejlfindingGuide, hoejvoltGuide, ladningGuide]
+const jlrGuide: AeoArticle = {
+  slug: 'jaguar-land-rover',
+  path: '/guides/jaguar-land-rover/',
+  title: 'Jaguar Land Rover-kurser',
+  description:
+    'AutoMind underviser Jaguar Land Rover-teknikere i elbiler. Mads Budolfsen er approved JLR trainer fra Jaguar Land Rover Academy UK og har holdt både elbilkursus og assessment.',
+  intro:
+    'Jaguar Land Rover-kurserne hos AutoMind er undervisning og assessment for mærkets teknikere. De er ikke værkstedsservice på kunders biler.',
+  kind: 'guide',
+  sections: [
+    {
+      question: 'Holder AutoMind kurser for Jaguar Land Rover?',
+      answer: 'Ja. Mads Budolfsen har undervist JLR-teknikere i elbiler, og han er approved JLR trainer fra Jaguar Land Rover Academy UK.',
+      paragraphs: [
+        'På LinkedIn står uddannelsen som approved JLR trainer ved Jaguar Land Rover Academy UK. I 2013 blev han certificeret Range Rover-hybridtekniker. Før AutoMind var han teknisk træner for Jaguar Land Rover i Skandinavien hos Autobranchens Udviklingscenter.',
+      ],
+      list: [
+        'Approved JLR trainer, Jaguar Land Rover Academy UK',
+        'Certificeret Range Rover-hybridtekniker, 2013',
+        'Teknisk træner for Jaguar Land Rover i Skandinavien, 2009-2019',
+        'Elbilkursus for JLR-teknikere, 2023',
+        'Assessment for JLR og online undervisning for Skandinavien, 2026',
+      ],
+    },
+    {
+      question: 'Hvad gik elbilkurset i 2023 ud på?',
+      answer: 'Et hold teknikere fra JLR var på elbilundervisning, rettet efter det, Scandinavian Helpdesk ser, de sidder med.',
+      paragraphs: [
+        'Mads Budolfsen skrev på LinkedIn, at kurset blev lagt efter den sparring, helpdesken allerede giver. Det er undervisning for teknikere fra mærket, ikke en åben prisliste.',
+      ],
+    },
+    {
+      question: 'Laver AutoMind også assessment for Jaguar Land Rover?',
+      answer: 'Ja. I 2026 lagde han to dage med assessment for JLR og en dag med online undervisning for hele Skandinavien.',
+      paragraphs: [
+        'Det står i et LinkedIn-opslag fra august 2026. Assessmentens sted er ikke nævnt der. Den online dag var for Skandinavien.',
+      ],
+    },
+  ],
+  quote: {
+    ...mads,
+    text: 'Today we will welcome a group of great technicians from JLR to a round electric vehicle training. … we have aimed the course towards, what we can see they are struggling with.',
+    source: {
+      label: 'LinkedIn, 25. september 2023',
+      href: 'https://www.linkedin.com/posts/mads-budolfsen-046523a4_electricvehicletraining-evtraining-picoautomotive-activity-7111932415555555328-ZHS1',
+    },
+  },
+  faq: [
+    {
+      question: 'Reparerer AutoMind Jaguar og Land Rover for private kunder?',
+      answer: 'Det står ikke i kilderne. Det, der er beskrevet, er undervisning og assessment for mærkets teknikere.',
+    },
+    {
+      question: 'Er underviseren godkendt af Jaguar Land Rover?',
+      answer: 'Ja. LinkedIn angiver ham som approved JLR trainer ved Jaguar Land Rover Academy UK, herunder certificeret Range Rover-hybridtekniker i 2013.',
+    },
+    {
+      question: 'Hvor skriver et værksted, der vil høre om et forløb?',
+      answer: 'Skriv til mads@automind.dk. Dato og pris aftales i dialogen.',
+    },
+  ],
+  links: [
+    { href: '/guides/hvem-underviser/', label: 'Hvem underviser' },
+    { href: '/guides/byd-kurser/', label: 'BYD-kurser' },
+    { href: '/kontakt/', label: 'Skriv om et forløb' },
+  ],
+}
+
+const bydGuide: AeoArticle = {
+  slug: 'byd-kurser',
+  path: '/guides/byd-kurser/',
+  title: 'BYD-kurser',
+  description:
+    'AutoMind i Hjørring underviser BYD-teknikere, blandt andet på New Service Shop. BYD Europe i Holland har uddannet og testet Mads Budolfsen, før han underviser de danske teknikere.',
+  intro:
+    'BYD-kurserne er for mærkets teknikere. Motor Magasinet beskrev holdet i Hjørring, og LinkedIn beskriver de dage, der fulgte med ADAS, højspænding og Pico.',
+  kind: 'guide',
+  sections: [
+    {
+      question: 'Underviser AutoMind BYD-teknikere?',
+      answer: 'Ja. AutoMind i Hjørring har undervist teknikere fra BYD-værksteder, blandt andet på kurset New Service Shop.',
+      paragraphs: [
+        'Motor Magasinet skrev 23. april 2025, at teknikere blev undervist i produktkendskab og fejlsøgning. Nye BYD-teknikere kommer på introkurset, før de begynder at arbejde med bilerne.',
+      ],
+    },
+    {
+      question: 'Hvad er New Service Shop?',
+      answer: 'Det er introkurset, hvor de systemer, der skal bruges for at servicere bilerne, bliver gennemgået.',
+      paragraphs: [
+        'Artiklen beskriver det som starten på et længere forløb. Morten Mikkelsen fra BYD var med to dage i Hjørring, så teknikerne kunne lære den tekniske afdeling at kende.',
+      ],
+      list: [
+        'New Service Shop for nye BYD-teknikere',
+        'Produktkendskab og fejlsøgning',
+        'Undervisning i Hjørring',
+        'Kontakt til BYDs tekniske afdeling',
+      ],
+    },
+    {
+      question: 'Hvad har holdene ellers været igennem?',
+      answer: 'I september 2025 havde et hold BYD-teknikere fire dage med ADAS, højspænding og fejlfinding med Pico.',
+      paragraphs: [
+        'Mads Budolfsen skrev, at dagene startede med ADAS, og at holdet derefter gik til højspændingsdelen og flere fejlfindingsmetoder.',
+      ],
+    },
+    {
+      question: 'Hvem har uddannet underviseren til BYD?',
+      answer: 'BYDs europæiske hovedkontor i Holland har uddannet og testet ham, før han underviser de danske teknikere.',
+      paragraphs: [
+        'Motor Magasinet citerer ham for, at undervisningen krævede en praktisk prøve og en teoretisk test. Fabrikken leverer materiale, som tilpasses de danske teknikere og bilmodeller.',
+      ],
+    },
+  ],
+  quote: {
+    ...mads,
+    text: 'Det er en rigtig spændende rejse, og den er kun lige begyndt.',
+    source: {
+      label: 'Motor Magasinet, 23. april 2025',
+      href: 'https://www.motormagasinet.dk/article/view/1159434/teknikere_krob_helt_ind_under_huden_pa_bydbilerne',
+    },
+  },
+  faq: [
+    {
+      question: 'Er BYD-kurset åbent for alle værksteder?',
+      answer: 'Artiklen beskriver teknikere på BYD-værksteder og nye BYD-teknikere. Skriv til AutoMind, hvis I vil høre, om et forløb er relevant.',
+    },
+    {
+      question: 'Står dato og pris på siden?',
+      answer: 'Nej. Dato og pris aftales i dialogen.',
+    },
+    {
+      question: 'Laver AutoMind service på kunders BYD?',
+      answer: 'Kilderne beskriver undervisning af teknikere, ikke værkstedsreparation for private kunder.',
+    },
+  ],
+  links: [
+    { href: '/guides/hvem-underviser/', label: 'Hvem underviser' },
+    { href: '/guides/jaguar-land-rover/', label: 'Jaguar Land Rover-kurser' },
+    { href: '/kontakt/', label: 'Skriv om et forløb' },
+  ],
+}
+
+const underviserGuide: AeoArticle = {
+  slug: 'hvem-underviser',
+  path: '/guides/hvem-underviser/',
+  title: 'Hvem underviser',
+  description:
+    'Mads Budolfsen er træner hos AutoMind siden 2019, automekaniker, approved JLR trainer og testet af BYD Europe, før han underviser danske teknikere.',
+  intro:
+    'Uddannelsen bag kurserne kan læses på LinkedIn og i Motor Magasinet. Der står ingen placering som bedst i landet.',
+  kind: 'guide',
+  sections: [
+    {
+      question: 'Hvem underviser hos AutoMind Hjørring?',
+      answer: 'Mads Budolfsen. Han er træner hos AutoMind siden august 2019 og udlært automekaniker.',
+      paragraphs: [
+        'Automekanikeruddannelsen er fra EUC Nord. LinkedIn angiver ham som træner hos AutoMind i Hjørring Kommune.',
+      ],
+    },
+    {
+      question: 'Hvilken uddannelse ligger bag Jaguar Land Rover?',
+      answer: 'Han er approved JLR trainer ved Jaguar Land Rover Academy UK.',
+      paragraphs: [
+        'I 2013 blev han certificeret Range Rover-hybridtekniker. Fra 2009 til 2019 var han teknisk træner hos Autobranchens Udviklingscenter, herunder for Jaguar Land Rover i Skandinavien.',
+      ],
+      list: [
+        'Approved JLR trainer, Jaguar Land Rover Academy UK',
+        'Certificeret Range Rover-hybridtekniker, 2013',
+        'Teknisk træner, Autobranchens Udviklingscenter, 2009-2019',
+        'Pædagogikum, Metropol, 2010-2012',
+        'Automekaniker, EUC Nord',
+      ],
+    },
+    {
+      question: 'Hvilken uddannelse ligger bag BYD?',
+      answer: 'BYDs europæiske hovedkontor i Holland har uddannet ham og testet både undervisningen og teorien.',
+      paragraphs: [
+        'Motor Magasinet skrev, at en praktisk prøve i at undervise og en teoretisk test skulle bestås, før undervisningen af de danske teknikere gik i gang.',
+      ],
+    },
+    {
+      question: 'Har han en uddannelse i at undervise voksne?',
+      answer: 'Ja. Pædagogikum på Metropol fra 2010 til 2012, med fokus på undervisning af voksne.',
+    },
+  ],
+  quote: {
+    ...mads,
+    text: 'Jeg skulle vise, hvordan jeg underviser med en praktisk prøve, men også en lang teoretisk test skulle bestås for, at vi kunne komme i gang.',
+    source: {
+      label: 'Motor Magasinet, 23. april 2025',
+      href: 'https://www.motormagasinet.dk/article/view/1159434/teknikere_krob_helt_ind_under_huden_pa_bydbilerne',
+    },
+  },
+  faq: [
+    {
+      question: 'Er AutoMind Danmarks bedst uddannede?',
+      answer: 'Den placering står ikke i kilderne. Det, der står, er godkendelserne: JLR Academy, BYD-testen i Holland, pædagogikum og automekanikeruddannelsen.',
+    },
+    {
+      question: 'Hvor længe har han undervist?',
+      answer: 'LinkedIn angiver træner hos AutoMind siden august 2019 og teknisk træner hos Autobranchens Udviklingscenter fra 2009 til 2019.',
+    },
+    {
+      question: 'Hvor skriver jeg?',
+      answer: 'Skriv til mads@automind.dk om et kursus eller en konkret opgave.',
+    },
+  ],
+  links: [
+    { href: '/guides/jaguar-land-rover/', label: 'Jaguar Land Rover-kurser' },
+    { href: '/guides/byd-kurser/', label: 'BYD-kurser' },
+    { href: '/kurser/', label: 'Se de øvrige kurser' },
+  ],
+}
+
+export const brandGuides = [jlrGuide, bydGuide, underviserGuide]
+
+export const guides = [fejlfindingGuide, hoejvoltGuide, ladningGuide, ...brandGuides]
 
 export const topicArticles: Record<string, AeoArticle> = {
   kontakt: kontaktTopic,
@@ -477,7 +693,9 @@ export function articleLines(article: AeoArticle, origin = 'https://automind.dk'
     `> ${article.quote.text}`,
     '',
     `${article.quote.name}, ${article.quote.role}`,
-    '',
+    ...(article.quote.source
+      ? [`Kilde: ${article.quote.source.label}${article.quote.source.href ? ` (${article.quote.source.href})` : ''}`, '']
+      : ['']),
     ...article.faq.flatMap((entry) => [`##### ${entry.question}`, '', entry.answer, '']),
   ]
 }

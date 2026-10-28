@@ -26,6 +26,13 @@ const faqId = `faq-${article.kind}-${article.slug}`
     <p>{article.quote.text}</p>
     <footer>
       <cite>{article.quote.name}</cite>, {article.quote.role}
+      {article.quote.source && (
+        <span class="aeo-source">
+          Kilde: {article.quote.source.href ? (
+            <a href={article.quote.source.href}>{article.quote.source.label}</a>
+          ) : article.quote.source.label}
+        </span>
+      )}
     </footer>
   </blockquote>
   <section class="faq" aria-labelledby={faqId}>
